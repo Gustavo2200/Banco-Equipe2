@@ -1,4 +1,4 @@
-package br.com.cdb.entity;
+package br.com.cdb.enums;
 public enum TipoPagamento {
 	CARTAO_CREDITO(0),
 	CARTAO_DEBITO(1),

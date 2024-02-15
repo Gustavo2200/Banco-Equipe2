@@ -1,17 +1,14 @@
-package ClienteDaoImpl;
+package br.com.cdb.dao.impl;
 
 import java.util.List;
-
-import javax.xml.crypto.Data;
-
-import br.com.cdb.Dao.Dao;
+import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.entity.Cliente;
 
-public class ClienteDao implements Dao {
+public class ClienteDaoImpl implements ClienteDao {
 
 	private List<Cliente> listaDeClientes;
 
-	public ClienteDao(List<Cliente> listadeclientes) {
+	public ClienteDaoImpl(List<Cliente> listadeclientes) {
 		this.listaDeClientes = listadeclientes;
 	}
 

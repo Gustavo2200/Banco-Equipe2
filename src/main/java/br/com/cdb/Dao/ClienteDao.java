@@ -1,10 +1,10 @@
-package br.com.cdb.Dao;
+package br.com.cdb.dao;
 
 import java.util.List;
 
 import br.com.cdb.entity.Cliente;
 
-public interface Dao {
+public interface ClienteDao {
 
 
 	public void addCliente(Cliente cliente);

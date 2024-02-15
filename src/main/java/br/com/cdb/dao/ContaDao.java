@@ -12,7 +12,5 @@ public interface ContaDao {
 	
 	public Conta contaPorId(long id);
 	
-	
-	
-	
+	void getCpf(String cpf);
 }
