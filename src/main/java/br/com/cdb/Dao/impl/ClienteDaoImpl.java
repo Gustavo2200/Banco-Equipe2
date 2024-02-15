@@ -1,17 +1,17 @@
-package ClienteDaoImpl;
+package br.com.cdb.Dao.impl;
 
 import java.util.List;
 
 import javax.xml.crypto.Data;
 
-import br.com.cdb.Dao.Dao;
+import br.com.cdb.Dao.ClienteDao;
 import br.com.cdb.entity.Cliente;
 
-public class ClienteDao implements Dao {
+public class ClienteDaoImpl implements ClienteDao {
 
 	private List<Cliente> listaDeClientes;
 
-	public ClienteDao(List<Cliente> listadeclientes) {
+	public ClienteDaoImpl(List<Cliente> listadeclientes) {
 		this.listaDeClientes = listadeclientes;
 	}
 
@@ -42,6 +42,17 @@ public class ClienteDao implements Dao {
 	}
 	return null;
 		
+	}
+
+	@Override
+	public Cliente CpfExiste(String cpf) {
+		for(int i = 0; i < listaDeClientes.size(); i++) {
+			Cliente clientes = listaDeClientes.get(i);
+			if(cpf.equalsIgnoreCase(listaDeClientes.get(i).getCpf())){
+				return clientes;
+			}
+		}
+		return null;
 	}
 	
 	
