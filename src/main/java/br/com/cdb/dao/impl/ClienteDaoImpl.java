@@ -1,7 +1,9 @@
+
 package br.com.cdb.dao.impl;
 
 import java.util.List;
 import br.com.cdb.dao.ClienteDao;
+
 import br.com.cdb.entity.Cliente;
 
 public class ClienteDaoImpl implements ClienteDao {
@@ -39,6 +41,17 @@ public class ClienteDaoImpl implements ClienteDao {
 	}
 	return null;
 		
+	}
+
+	@Override
+	public Cliente CpfExiste(String cpf) {
+		for(int i = 0; i < listaDeClientes.size(); i++) {
+			Cliente clientes = listaDeClientes.get(i);
+			if(cpf.equalsIgnoreCase(listaDeClientes.get(i).getCpf())){
+				return clientes;
+			}
+		}
+		return null;
 	}
 	
 	
