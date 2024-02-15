@@ -1,9 +1,8 @@
-package br.com.cdb.service;
+package br.com.cdb.Service;
 
 import java.util.List;
 
 import br.com.cdb.entity.Cliente;
-import br.com.cdb.entity.TipoPagamento;
 
 public interface ClienteService {
 	public void addCliente(Cliente cliente);

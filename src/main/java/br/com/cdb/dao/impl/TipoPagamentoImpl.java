@@ -1,5 +1,5 @@
-package br.com.cdb.dao.impl;
-import br.com.cdb.dao.InterfacePagamento;
+package br.com.cdb.Dao.impl;
+import br.com.cdb.Dao.InterfacePagamento;
 import br.com.cdb.enums.TipoPagamento;
 
 public class TipoPagamentoImpl implements InterfacePagamento{
