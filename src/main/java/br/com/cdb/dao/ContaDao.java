@@ -10,7 +10,7 @@ public interface ContaDao {
 	
 	public List<Conta> listar();
 	
-	public void contaPorId(long id);
+	public Conta contaPorId(long id);
 	
 	
 	

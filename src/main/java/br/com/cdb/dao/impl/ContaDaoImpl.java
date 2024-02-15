@@ -7,7 +7,7 @@ import br.com.cdb.dao.ContaDao;
 import br.com.cdb.entity.Conta;
 
 public class ContaDaoImpl implements ContaDao{
-private ArrayList listaDeContas= new ArrayList<>();
+private ArrayList<Conta> listaDeContas= new ArrayList<>();
 	
 	@Override
 	public void addConta(Conta conta) {
@@ -17,20 +17,20 @@ private ArrayList listaDeContas= new ArrayList<>();
 
 	@Override
 	public List<Conta> listar() {
-		List <Conta> contas= new ArrayList<>();
 		
-		for(Conta conta:listaDeContas) {
-			System.out.println(conta);
+			return listaDeContas;
+		
 		}
-		return contas;
-	}
 
 	@Override
-	public void contaPorId(long id) {
+	public Conta contaPorId(long id) {
 		
 		for(Conta conta:listaDeContas) {
-			if(conta.get)
-		}
+			if(conta.getId()==id) {
+			return conta;
+			}
 		
+		}
+		return null;
 	}
 }
