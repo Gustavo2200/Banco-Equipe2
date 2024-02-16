@@ -1,4 +1,4 @@
-package br.com.cdb.Dao;
+package br.com.cdb.dao;
 
 import java.util.List;
 
@@ -12,5 +12,6 @@ public interface ContaDao {
 	
 	public Conta contaPorId(long id);
 	
-	void getCpf(String cpf);
+	public Conta getCpf(String cpf);	
+	
 }

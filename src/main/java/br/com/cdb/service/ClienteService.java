@@ -1,4 +1,4 @@
-package br.com.cdb.Service;
+package br.com.cdb.service;
 
 import java.util.List;
 

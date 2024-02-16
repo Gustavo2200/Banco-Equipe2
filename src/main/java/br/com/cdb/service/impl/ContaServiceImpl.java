@@ -1,6 +1,6 @@
-package br.com.cdb.Service.impl;
+package br.com.cdb.service.impl;
 
-import br.com.cdb.Service.ContaService;
+import br.com.cdb.service.ContaService;
 import br.com.cdb.entity.Conta;
 
 import java.util.Random;
