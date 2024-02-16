@@ -1,6 +1,6 @@
 package br.com.cdb.Service;
 
-import br.com.cdb.Dao.ClienteDao;
+import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.entity.Cliente;
 
 

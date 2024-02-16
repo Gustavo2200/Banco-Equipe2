@@ -8,12 +8,20 @@ public class Cliente {
 	private String email;
 	private String senha;
 	private long id;
+<<<<<<< HEAD
+
+	public Cliente() {
+	}
+
+=======
 	
 	public Cliente (String nome, String senha) {
 		this.nome=nome;
 		this.senha=senha;
 	}
-		public String getCpf() {
+	
+>>>>>>> feature/feature7
+	public String getCpf() {
 		return cpf;
 	}
 
@@ -22,7 +30,7 @@ public class Cliente {
 		if (cpf.matches(regex)) {
 			this.cpf = cpf;
 		} else {
-			throw new RuntimeException("Erro, cpf inv·lido!");
+			throw new RuntimeException("Erro, cpf inv√°lido!");
 		}
 
 	}
@@ -60,7 +68,7 @@ public class Cliente {
 		if (senha.matches(regex)) {
 			this.senha = senha;
 		} else {
-			throw new RuntimeException("Erro, senha inv·lida!");
+			throw new RuntimeException("Erro, senha inv√°lida!");
 		}
 
 	}
