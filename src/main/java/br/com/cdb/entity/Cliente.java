@@ -8,7 +8,10 @@ public class Cliente {
 	private String senha;
 	private long id;
 	
-	public Cliente () {}
+	public Cliente (String nome, String senha) {
+		this.nome=nome;
+		this.senha=senha;
+	}
 	
 	public String getCpf() {
 		return cpf;
