@@ -1,9 +1,8 @@
 package br.com.cdb.dao.impl;
 
 import java.util.List;
-import br.com.cdb.Dao.ClienteDao;
-
-import br.com.cdb.Dao.ClienteDao;import br.com.cdb.entity.Cliente;
+import br.com.cdb.dao.ClienteDao;
+import br.com.cdb.entity.Cliente;
 
 public class ClienteDaoImpl implements ClienteDao {
 

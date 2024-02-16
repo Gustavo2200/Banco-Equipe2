@@ -1,4 +1,4 @@
-package br.com.cdb.Dao;
+package br.com.cdb.dao;
 import br.com.cdb.enums.TipoPagamento;
 
 public interface InterfacePagamento {

@@ -1,9 +1,9 @@
-package br.com.cdb.Dao.impl;
+package br.com.cdb.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.cdb.Dao.ContaDao;
+import br.com.cdb.dao.ContaDao;
 import br.com.cdb.entity.Cliente;
 import br.com.cdb.entity.Conta;
 

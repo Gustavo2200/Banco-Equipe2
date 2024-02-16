@@ -1,4 +1,4 @@
-package br.com.cdb.Service;
+package br.com.cdb.service;
 
 import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.entity.Cliente;
