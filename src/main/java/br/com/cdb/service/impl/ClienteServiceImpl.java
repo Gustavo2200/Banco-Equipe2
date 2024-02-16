@@ -1,11 +1,17 @@
-package br.com.cdb.service;
+package br.com.cdb.service.impl;
+
 
 import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.entity.Cliente;
+import br.com.cdb.service.ClienteService;
 
 
 public class ClienteServiceImpl implements ClienteService {
 	private ClienteDao clienteDao;
+	public ClienteServiceImpl(ClienteDao cd) {
+		this.clienteDao = cd;
+	}
+	
 	@Override
 	public void addCliente(Cliente cliente) {
 		Cliente c = clienteDao.CpfExiste(cliente.getCpf());
