@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cdb.dao.ContaDao;
-import br.com.cdb.entity.Cliente;
 import br.com.cdb.entity.Conta;
 
 public class ContaDaoImpl implements ContaDao{
@@ -36,13 +35,13 @@ private ArrayList<Conta> listaDeContas= new ArrayList<>();
 	}
 
 	@Override
-	public void getCpf(String cpf) {
+	public Conta getCpf(String cpf) {
 		for(int i = 0; i<listaDeContas.size(); i++) {
-			Conta contaDao = listaDeContas.get(i);
-			if(listaDeContas.get(i).getCpfDoCliente() == cpf){
-				
+			if(listaDeContas.get(i).getCpfDoCliente().equals(cpf)){
+				return listaDeContas.get(i);
 			}
 		}
-		
+		return null;
 	}
+
 }
