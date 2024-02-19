@@ -1,6 +1,5 @@
 package br.com.cdb.dao;
 
-import java.util.List;
 
 import br.com.cdb.entity.Cliente;
 
