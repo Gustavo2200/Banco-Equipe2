@@ -6,10 +6,12 @@ public class Transferencia {
 	
 	private int pessoa2;
 	
-	private int valor;
+	private double valor;
 
 	
-	public void Trasferencia(int pessoa1, int pessoa2, int valor) {
+	
+
+	public Transferencia(int pessoa1, int pessoa2, double valor) {
 		this.pessoa1=pessoa1;
 		this.pessoa2=pessoa2;
 		this.valor=valor;
@@ -19,9 +21,9 @@ public class Transferencia {
 		if(contaOrigem.getSaldo()>=valor) {
 			contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
 			contaOrigem.setSaldo(contaOrigem.getSaldo()+valor);
-			System.out.println("Transferência de"+ valor +"realizada com sucesso ");
+			
 		}else {
-			System.out.println("Saldo insuficiente");
+			throw new RuntimeException("Saldo insuficiente");
 		}
 	
 		
@@ -48,7 +50,7 @@ public class Transferencia {
 		this.pessoa2 = pessoa2;
 	}
 
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
 
