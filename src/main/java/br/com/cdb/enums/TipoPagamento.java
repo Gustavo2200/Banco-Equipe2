@@ -1,16 +1,22 @@
 package br.com.cdb.enums;
 public enum TipoPagamento {
-	CARTAO_CREDITO(0),
-	CARTAO_DEBITO(1),
-	PIX(2),
-	TED(3);
+	PIX(0,"PIX"),
+	TED(1,"TED");
 	
 	private int tipoPagamento;
+	private String descricao;
 	
-	private TipoPagamento(int tipoPagamento) {this.tipoPagamento = tipoPagamento;}
+	private TipoPagamento(int tipoPagamento,String descricao) {
+		this.tipoPagamento = tipoPagamento;
+		this.descricao = descricao;
+		}
 
 	public int getTipoPagamento() {
 		return tipoPagamento;
+	}
+	
+	public String getDescricao() {
+		return descricao;
 	}
 
 }

@@ -1,5 +1,7 @@
 package br.com.cdb.entity;
 
+import br.com.cdb.enums.TipoPagamento;
+
 public class Transferencia {
 
 	private int pessoa1;
@@ -7,16 +9,31 @@ public class Transferencia {
 	private int pessoa2;
 	
 	private double valor;
-
 	
+	private int id;
 	
-
-	public Transferencia(int pessoa1, int pessoa2, double valor) {
+	TipoPagamento tipo;
+	
+	public Transferencia(int pessoa1, int pessoa2, double valor, TipoPagamento tipo) {
 		this.pessoa1=pessoa1;
 		this.pessoa2=pessoa2;
 		this.valor=valor;
+		this.tipo=tipo;
 	}
 	
+	 @Override
+	    public String toString(){
+	        return "Conta Origem: " +pessoa1 + "\nConta Destino: " + pessoa2
+	                + "\nValor: " + valor + "\nTipo de Transação: " + tipo.getDescricao() + "\n\n";
+	    }
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public void transferir(Conta contaOrigem, Conta contaDestino) {
 		if(contaOrigem.getSaldo()>=valor) {
 			contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
@@ -30,9 +47,6 @@ public class Transferencia {
 		
 		
 	}
-	
-	
-	
 	
 	public int getPessoa1() {
 		return pessoa1;

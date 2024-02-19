@@ -4,6 +4,7 @@ import br.com.cdb.service.ContaService;
 import br.com.cdb.dao.ContaDao;
 import br.com.cdb.entity.Conta;
 import br.com.cdb.entity.Transferencia;
+import br.com.cdb.enums.TipoPagamento;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ public class ContaServiceImpl implements ContaService {
 
 
 	@Override
-	public void registrarPix(long idContaOrigem, String cpfDestino, double valor) {
+	public void registrarPix(long idContaOrigem, String cpfDestino, double valor,TipoPagamento tipo) {
 		Conta contaOrigem=contaDao.contaPorId(idContaOrigem);
 		Conta contaDestino=null;
 		if(contaOrigem!=null) {
@@ -34,7 +35,7 @@ public class ContaServiceImpl implements ContaService {
 		}
 		
 	if(contaDestino!=null) {
-		Transferencia transf= new Transferencia(contaOrigem.getNumeroConta(),contaDestino.getNumeroConta(),valor);
+		Transferencia transf= new Transferencia(contaOrigem.getNumeroConta(),contaDestino.getNumeroConta(),valor,tipo);
 	
 		transf.transferir(contaOrigem, contaDestino);
 	
