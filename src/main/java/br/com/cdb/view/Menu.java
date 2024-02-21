@@ -9,6 +9,7 @@
 //import br.com.cdb.enums.TipoPagamento;
 //import br.com.cdb.service.ClienteService;
 //import br.com.cdb.service.ContaService;
+//import br.com.cdb.service.TransferenciaService;
 //
 //public class Menu {
 //
@@ -30,12 +31,11 @@
 //	}
 //
 //	private void menuPrincipal() {
-////		Cliente c = new Cliente("Yago","12345678901","16/02/2005","yago.piovarczik1@gmail.com","13-35914787",12345678, new Conta(8735,76452534,1234));
-////        Cliente c2 = new Cliente("Eduardo","12345678901","12/12/2007","eu1@gmail.com","31995306082",12345678, new Conta(1234,12312312,1234));
-////        clienteService.salvarCliente(c);
-////        clienteService.salvarCliente(c2);
-////        contaService.salvarConta(c.getConta());
-////       contaService.salvarConta(c2.getConta());
+//		Cliente c = new Cliente("Yago","12345678","16/02/2005","12345678910","yago.piovarczik1@gmail.com");
+//        Cliente c2 = new Cliente("Eduardo","12345679","12/12/2007", "23456789101", "Eduardo@gmail.com");
+//        clienteService.addCliente(c);
+//        clienteService.addCliente(c2);
+//        
 //
 //		System.out.println("1-Cadastrar\n" + "2-Realizar login");
 //
@@ -47,30 +47,13 @@
 //			cadastrarCliente();
 //			break;
 //		case 2:
-//			Login();
+//			login();
 //			break;
 //		}
 //	}
 //
-//	private void cadastrarCliente() {
 //
-//		System.out.println("Insira seu nome:");
-//		String nome = input.nextLine();
-//
-//		System.out.println("Insira uma senha");
-//		String senha = input.nextLine();
-//
-//		try {
-//			Cliente cliente = new Cliente(nome, senha);
-//			clienteService.addCliente(cliente);
-//			System.out.println("Cliente cadastrado com sucesso!");
-//		} catch (Exception e) {
-//			System.out.println("Erro ao cadastrar, tente novamente");
-//		}
-//
-//	}
-//
-//	private void Login() {
+//	private void login() {
 //		int escolha = 0;
 //		Cliente clienteLogado;
 //		while (escolha != 3) {
@@ -89,224 +72,99 @@
 //				try {
 //					clienteLogado = clienteService.login(nome, senha);
 //					System.out.println("Login realizado! ");
-//					menuPrincipal();
+//					menuBanco(clienteLogado);
 //				} catch (RuntimeException e) {
 //
 //					System.out.println("Tente novamente.");
 //				}
 //				break;
 //			case 2:
-//				menuBanco();
+//				menuPrincipal();
 //				break;
 //			}
 //		}
 //	}
 //
-//	private void menuBanco() {
-//		boolean repet = true;
-//		while (repet) {
+//	private void menuBanco(Cliente clienteLogado) {
+//        boolean repet = true;
+//        while (repet) {
 //
-//			System.out.println("1. Consultar Saldo.");
-//			System.out.println("2. Depositar.");
-//			System.out.println("3. Transferencia via PIX.");
-//			System.out.println("4. Transferencia via TED.");
-//			System.out.println("5. Ver Historico de Transferência.");
-//			System.out.println("6. Voltar.");
+//            System.out.println("1. Consultar Saldo.");
+//            System.out.println("2. Depositar.");
+//            System.out.println("3. Transferencia via PIX.");
+//            System.out.println("4. Transferencia via TED.");
+//            System.out.println("5. Ver Historico de Transferência.");
+//            System.out.println("6. Voltar.");
 //
-//			int option = 0;
-//			while (true) {
-//				try {
-//					System.out.println("Sua escolha:");
-//					option = input.nextInt();
-//					input.nextLine();
-//					break;
-//				} catch (Exception e) {
-//					System.out.println("Opção inválida.");
-//					input.nextLine();
-//				}
-//			}
-//			Conta cliente;
-//			switch (option) {
+//            int option = 0;
+//            while (true) {
+//                try {
+//                    System.out.println("Sua escolha:");
+//                    option = input.nextInt();
+//                    input.nextLine();
+//                    break;
+//                } catch (Exception e) {
+//                    System.out.println("Opção inválida.");
+//                    input.nextLine();
+//                }
+//            }
 //
-//			case 1:
+//            switch (option) {
+//                case 1:
+//                Conta conta = contaService.getCpf(clienteLogado.getCpf());
+//                    System.out.println("Seu saldo atual: ");
+//                    System.out.println(conta.getSaldo());
+//                    break;
 //
-//				System.out.println("Seu saldo atual: ");
-//				System.out.println(cliente.getSaldo());
-//				break;
+//                case 2:
+//                    System.out.println("Digite o valor a Depositar: ");
+//                    double valor = input.nextDouble();
 //
-//			case 2:
+//                    break;
 //
-//				System.out.println("Digite o valor a Depositar: ");
-//				double valor = input.nextDouble();
+//                case 3:
+//                    System.out.println("Digite a chave pix:");
+//                    String chavePix = input.nextLine();
 //
-//				if (valor > 0) {
-//					double novoSaldo = cliente.getSaldo() + valor;
-//					System.out.println("Depósito de R$" + valor + " realizado com sucesso. Novo saldo: R$" + novoSaldo);
-//					cliente.setSaldo(novoSaldo);
+//                    System.out.println("Digite o valor da transferencia:");
+//                    double valor1 = input.nextDouble();
 //
-//				} else {
-//					System.out.println("Valor de depósito inválido. Tente novamente.");
-//				}
+//                    contaService.registrarPix(conta.getId(), chavePix, valor1, TipoPagamento.PIX);
+//                    break;
 //
-//				break;
+//                case 4:
+//                    System.out.println("Digite a agência da conta:");
+//                    int agencia = input.nextInt();
+//                    input.nextLine();
 //
-//			case 3:
+//                    System.out.println("Digite o número da conta:");
+//                    int numeroConta = input.nextInt();
+//                    input.nextLine();
 //
-//				System.out.println("Digite a chave pix:");
-//				String chavePix = input.nextLine();
+//                    System.out.println("Digite o valor da transferencia:");
+//                    int valorTed = input.nextInt();
+//                    input.nextLine();
+//                    
+//                    contaService.transferenciaTed(agencia, numeroConta, valorTed, TipoPagamento.TED);
+//                    break;
 //
-//				System.out.println("Digite o número da conta de origem:");
-//				int numeroContaOrigem = input.nextInt();
-//				input.nextLine();
+//                case 5:
+//                   transferenciaService.historico(numeroConta);
+//                   for (Transferencia transferencia : transferenciaService.historico(numeroConta)) {
+//                	   System.out.println(transferencia);
+//                   }
+//                   
+//                    break;
 //
-//				Conta contaOrigem = null;
-//				
-//				for (Conta conta : contaDao.conta {
-//					if (conta.getNumeroConta() == numeroContaOrigem) {
-//						contaOrigem = conta;
-//						break;
-//					}
-//				}
+//                case 6:
+//                    repet = false;
+//                    break;
+//            }
+//        }
+//    }
 //
-//				if (contaOrigem != null) {
-//					Conta contaDestino = contaService.registrarPix(chavePix);
 //
-//					Cliente clienteDestino = null;
-//					for (Cliente cliente : clienteService.getIdCliente())
-//						for (Conta conta : cliente.getContas()) {
-//							if (conta.getNumeroConta() == contaDestino.getNumeroConta()) {
-//								clienteDestino = cliente;
-//								break;
-//							}
-//						}
-//					
-//					if (clienteDestino != null) {
-//						break;
-//					}
-//					
-//					if (clienteDestino!= null) {
-//					System.out.println("O titular da conta destino é " + clienteDestino.getNome() + "? É isso mesmo?");
-//					String simNao = input.nextLine();
-//
-//					if (simNao.equalsIgnoreCase("sim")) {
-//						System.out.println("Digite o valor:");
-//						double valorTransferencia = input.nextDouble();
-//
-//						if (valorTransferencia < 0) {
-//							System.out.println("Valor de transferência inválido. Insira um valor positivo.");
-//						} else if (contaOrigem.getSaldo() >= valorTransferencia) {
-//							System.out.println("Digite sua senha de 4 números:");
-//							int senha = input.nextInt();
-//							input.nextLine();
-//
-//							if (contaOrigem.getSenha() == senha) {
-//								contaService.transferencia(contaOrigem, contaDestino, valorTransferencia,
-//										TipoPagamento.PIX);
-//								transferenciaService.salvarTransferencia(new Transferencia(contaOrigem, contaDestino,
-//										valorTransferencia, TipoPagamento.PIX));
-//								System.out.println("Transferência via PIX realizada com sucesso.");
-//							} else {
-//								System.out.println("Senha incorreta.");
-//							}
-//						} else {
-//							System.out.println("Saldo insuficiente para realizar a transferência.");
-//						}
-//					} else {
-//						System.out.println("Voltando ao menu anterior...");
-//					}
-//				} else {
-//					System.out
-//							.println("Conta de origem não encontrada. Verifique o número da conta e tente novamente.");
-//				}
-//				break;
-//				}
-//
-//			case 4:
-//
-//				System.out.println("Digite a agência da conta:");
-//				int agencia = input.nextInt();
-//				input.nextLine();
-//
-//				System.out.println("Digite o numero da conta:");
-//				int numeroConta = input.nextInt();
-//				input.nextLine();
-//				
-//                Cliente clienteDestinoTed= null;
-//				Conta contaDestinoTed = null;
-//
-//				
-//				for (Cliente cliente : clienteService.getClientes()) {
-//			            for (Conta conta : cliente.getContas()) {
-//			                if (conta.getAgencia() == agencia && conta.getNumeroConta() == contaDestinoTed.getNumeroConta()) {
-//			                    clienteDestinoTed = cliente;
-//			                    contaDestinoTed = conta;
-//			                    break;
-//			                }
-//			            }
-//			            if (clienteDestinoTed != null) {
-//			                break;
-//			            }
-//			        }
-//
-//			        if (clienteDestinoTed != null && clienteDestinoTed != null) {
-//			            System.out.println("O titular da conta destino é " + clienteDestinoTed.getNome() + "? É isso mesmo?");
-//			            String simNaoTed = input.nextLine();
-//
-//			            if (simNaoTed.equalsIgnoreCase("sim")) {
-//			                System.out.println("Digite o valor:");
-//			                double valorTransferenciaTed = input.nextDouble();
-//
-//			                if (valorTransferenciaTed < 0) {
-//			                    System.out.println("Valor de transferência inválido. Insira um valor positivo.");
-//			                } else if (contaOrigem.getSaldo() >= valorTransferenciaTed) {
-//			                    System.out.println("Digite sua senha de 4 números:");
-//			                    String senhaTed = input.nextLine();
-//			                    input.nextLine();
-//
-//			                    if (contaOrigem.getSenha() == senhaTed) {
-//			                        contaService.transferencia(contaOrigem, contaDestinoTed, valorTransferenciaTed, TipoPagamento.TED);
-//			                        transferenciaService.salvarTransferencia(new Transferencia(contaOrigem, contaDestinoTed, valorTransferenciaTed, TipoPagamento.TED));
-//			                        System.out.println("Transferência via TED realizada com sucesso.");
-//			                    } else {
-//			                        System.out.println("Senha incorreta.");
-//			                    }
-//			                } else {
-//			                    System.out.println("Saldo insuficiente para realizar a transferência.");
-//			                }
-//			            } else {
-//			                System.out.println("Voltando ao menu anterior...");
-//			            }
-//			        } else {
-//			            System.out.println("Conta destino não encontrada. Verifique a agência e número da conta e tente novamente.");
-//			        }
-//				} else {
-//			        System.out.println("Conta destino não encontrada. Verifique a agência e número da conta e tente novamente.");
-//			    }
-//				
-//			    break;
-//		
-//			case 5:
-//				for (Transferencia transferencia : transferenciaService.transferencias()) {
-//					if (contaOrigem.getNumeroConta() == transferencia.getContaOrigem().getNumeroConta()
-//							|| contaOrigem.getNumeroConta() == transferencia.getContaDestino().getNumeroConta()) {
-//						if (contaOrigem.getNumeroConta() == transferencia.getContaOrigem().getNumeroConta()) {
-//							System.out.println("Saída:");
-//						} else {
-//							System.out.println("Entrada:");
-//						}
-//						System.out.println(transferencia);
-//					}
-//				}
-//				break;
-//
-//			case 6:
-//				repet = false;
-//				break;
-//			}
-//		}
-//	}
-//
-//	private void registrarMenu() {
+//	private void cadastrarCliente() {
 //		Cliente cliente = new Cliente();
 //		String nome = "";
 //		while (true) {
@@ -366,10 +224,11 @@
 //			} catch (Exception ex) {
 //				System.out.println(ex.getMessage());
 //			}
+//			
 //		}
 //
 //		int agencia = contaService.numeroAgencia();
-//		int numeroConta = contaService.numerConta(null);
+//		int numeroConta = contaService.numerConta();
 //
 //		System.out.println("\nVamos Criar sua conta:");
 //		System.out.println("Sua agência é: " + agencia);
@@ -392,16 +251,28 @@
 //			}
 //		}
 //
-//		System.out.println("Voce ganhou um saldo de 100 reais.");
 //		System.out.println("Conta Criada");
+//		
+//		
+//		System.out.println("Qual conta você quer ");
+//		String escolhaConta = input.nextLine();
+//		
+///*		if(escolhaConta.equals("corrente")) {
+//			
+//		}
+//		
+//			
+//			if(escolhaConta.equals("poupanca"){
 //
-//		Conta conta1 = new Conta(senha, numeroConta, agencia);
-//
+//		Conta conta1 = new Conta(TipoConta.CONTA_POUPANCA, senha, saldo, numeroConta, 
+//				agencia, id, String cpfDoCliente);
+//			}
 //		ContaService.salvarConta(conta);
 //		Cliente cliente1 = new Cliente(nome, senha);
 //
 //		clienteService.salvarCliente(cliente1);
 //		System.out.println("Cliente registrado com sucesso.");
+//	*/
+//		menuPrincipal();
 //	}
-//
 //}
