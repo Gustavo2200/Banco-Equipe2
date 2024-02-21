@@ -1,4 +1,4 @@
-package br.com.cdb.dao.impl2;
+/*package br.com.cdb.dao.impl2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -72,4 +72,4 @@ public class ContaDaoImpl2 implements ContaDao {
 		return null;
 	}
 
-}
+}*/
