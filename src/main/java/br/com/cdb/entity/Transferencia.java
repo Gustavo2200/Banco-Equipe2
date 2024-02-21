@@ -5,10 +5,11 @@ import br.com.cdb.enums.TipoPagamento;
 public class Transferencia {
 
 	private int pessoa1;
-	
+
 	private int pessoa2;
-	
+
 	private double valor;
+<<<<<<< HEAD
 	
 	private int id;
 	
@@ -40,14 +41,30 @@ public class Transferencia {
 			contaOrigem.setSaldo(contaOrigem.getSaldo()+valor);
 			
 		}else {
+=======
+
+	public Transferencia(int pessoa1, int pessoa2, double valor) {
+		this.pessoa1 = pessoa1;
+		this.pessoa2 = pessoa2;
+		this.valor = valor;
+	}
+
+	public void transferir(Conta contaOrigem, Conta contaDestino, double valor) {
+		if (contaOrigem.getSaldo() >= valor) {
+			contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
+			contaDestino.setSaldo(contaDestino.getSaldo() + valor);
+
+		} else {
+>>>>>>> feature/feature4
 			throw new RuntimeException("Saldo insuficiente");
 		}
-	
-		
-		
-		
+
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> feature/feature4
 	public int getPessoa1() {
 		return pessoa1;
 	}
@@ -71,10 +88,5 @@ public class Transferencia {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-	
-	
-
-
-
 
 }
