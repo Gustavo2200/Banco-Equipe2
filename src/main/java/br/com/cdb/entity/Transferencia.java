@@ -9,8 +9,7 @@ public class Transferencia {
 	private int pessoa2;
 
 	private double valor;
-<<<<<<< HEAD
-	
+
 	private int id;
 	
 	TipoPagamento tipo;
@@ -35,13 +34,7 @@ public class Transferencia {
 		this.id = id;
 	}
 
-	public void transferir(Conta contaOrigem, Conta contaDestino) {
-		if(contaOrigem.getSaldo()>=valor) {
-			contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
-			contaOrigem.setSaldo(contaOrigem.getSaldo()+valor);
-			
-		}else {
-=======
+	
 
 	public Transferencia(int pessoa1, int pessoa2, double valor) {
 		this.pessoa1 = pessoa1;
@@ -55,16 +48,12 @@ public class Transferencia {
 			contaDestino.setSaldo(contaDestino.getSaldo() + valor);
 
 		} else {
->>>>>>> feature/feature4
+
 			throw new RuntimeException("Saldo insuficiente");
 		}
 
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> feature/feature4
 	public int getPessoa1() {
 		return pessoa1;
 	}

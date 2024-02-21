@@ -7,11 +7,6 @@ public interface ContaService {
 
 	public int numeroAgencia();
 
-<<<<<<< HEAD
-	public void numerConta(Conta conta);
-	
-	public void registrarPix(long idContaOrigem, String cpfDestino, double valor,TipoPagamento tipo);
-=======
 	public int numerConta();
 
 	public double mostrarSaldo(long id);
@@ -22,5 +17,4 @@ public interface ContaService {
 
 	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo);
 
->>>>>>> feature/feature4
 }
