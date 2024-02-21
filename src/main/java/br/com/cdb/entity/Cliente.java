@@ -11,9 +11,12 @@ public class Cliente {
 	
 	public Cliente() {}
 	
-	public Cliente (String nome, String senha) {
+	public Cliente (String nome, String senha, String dataNascimento, String cpf, String email) {
 		this.nome=nome;
 		this.senha=senha;
+		this.cpf=cpf;
+		this.dataNascimento=dataNascimento;
+		this.email=email;
 	}
 		public String getCpf() {
 		return cpf;
