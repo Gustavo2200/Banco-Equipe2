@@ -21,4 +21,6 @@ public interface ContaDao {
 
 	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id);
 
+	public boolean getSenha(String senha);
+
 }

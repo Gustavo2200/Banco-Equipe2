@@ -80,5 +80,11 @@ public class ContaServiceImpl implements ContaService {
 		contaDao.depositar(valor, numeroConta);
 		
 	}
+
+
+	@Override
+	public boolean getSenha(String senha) {
+		return contaDao.getSenha(senha);
+	}
 	
 }
