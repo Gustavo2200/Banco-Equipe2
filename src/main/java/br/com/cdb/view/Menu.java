@@ -68,9 +68,11 @@ public class Menu {
 				} catch (RuntimeException e) {
 
 					System.out.println("Tente novamente.");
+					menuPrincipal();
 				}
 				
 				 menuBanco(clienteLogado);
+				 
 	}
 
 	private void menuBanco(Cliente clienteLogado) {
