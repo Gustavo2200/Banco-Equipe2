@@ -25,4 +25,6 @@ public interface ContaService {
 	
 	public List<Conta> listar();
 
+	public boolean getSenha(String senha);
+
 }

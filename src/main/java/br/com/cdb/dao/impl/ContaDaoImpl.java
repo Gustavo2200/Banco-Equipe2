@@ -112,4 +112,14 @@ public class ContaDaoImpl implements ContaDao {
 	        throw new RuntimeException("Conta não encontrada");
 	    }
 	}
+
+	@Override
+	public boolean getSenha(String senha) {
+		for(Conta conta:listaDeContas) {
+			if(senha.equals(conta.getSenha())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
