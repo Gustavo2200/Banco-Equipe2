@@ -7,6 +7,7 @@ import br.com.cdb.entity.Conta;
 
 import br.com.cdb.enums.TipoPagamento;
 
+import java.util.List;
 import java.util.Random;
 
 public class ContaServiceImpl implements ContaService {
@@ -29,7 +30,7 @@ public class ContaServiceImpl implements ContaService {
 	@Override
 	public int numerConta() {
 		Random random = new Random();
-		int numeroAlea = random.nextInt(9000) + 1000;
+		int numeroAlea = random.nextInt(90000000) + 10000000;
 
 		return numeroAlea;
 	}
@@ -49,8 +50,8 @@ public class ContaServiceImpl implements ContaService {
 	
 
 	@Override
-	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo) {
-		contaDao.transferenciaTed(agencia, numeroConta, valor, tipo);
+	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+		contaDao.transferenciaTed(agencia, numeroConta, valor, tipo, id);
 
 	}
 
@@ -59,4 +60,25 @@ public class ContaServiceImpl implements ContaService {
 	contaDao.addConta(conta);
 	}
 
+
+	@Override
+	public Conta getCpf(String cpf) {
+	return contaDao.getCpf(cpf);
+	
+	}
+
+
+	@Override
+	public List<Conta> listar() {
+		
+		return contaDao.listar();
+	}
+
+
+	@Override
+	public void depositar(double valor, int numeroConta) {
+		contaDao.depositar(valor, numeroConta);
+		
+	}
+	
 }

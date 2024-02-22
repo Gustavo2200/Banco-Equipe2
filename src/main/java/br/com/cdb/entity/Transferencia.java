@@ -36,12 +36,6 @@ public class Transferencia {
 
 	
 
-	public Transferencia(int pessoa1, int pessoa2, double valor) {
-		this.pessoa1 = pessoa1;
-		this.pessoa2 = pessoa2;
-		this.valor = valor;
-	}
-
 	public void transferir(Conta contaOrigem, Conta contaDestino, double valor) {
 		if (contaOrigem.getSaldo() >= valor) {
 			contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);

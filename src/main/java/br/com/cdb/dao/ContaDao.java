@@ -8,6 +8,8 @@ import br.com.cdb.enums.TipoPagamento;
 public interface ContaDao {
 
 	public List<Conta> listar();
+	
+	public void depositar(double valor, int numeroConta);
 
 	public Conta contaPorId(long id);
 
@@ -17,6 +19,6 @@ public interface ContaDao {
 
 	public void transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo);
 
-	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo);
+	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id);
 
 }

@@ -48,21 +48,21 @@ public class ContaDaoImpl implements ContaDao {
 	}
 
 	@Override
-	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo) {
+	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 
 		Conta contaD = new Conta();
 		Conta contaO = new Conta();
 
 		for (Conta conta : listaDeContas) {
-			if (conta.getAgencia() == agencia) {
+			if (conta.getId() == id) {
 				contaO = conta;
-			} 
-			if (conta.getNumeroConta() == numeroConta ) {
+			}
+			if (conta.getNumeroConta() == numeroConta && conta.getAgencia()== agencia) {
 				contaD = conta;
 			}
 
 		}
-		Transferencia trans = new Transferencia(contaO.getNumeroConta(), contaD.getNumeroConta(), valor);
+		Transferencia trans = new Transferencia(contaO.getNumeroConta(), contaD.getNumeroConta(), valor, tipo);
 		trans.transferir(contaO, contaD, valor);
 
 		listaDeContas.add(contaO);
@@ -80,16 +80,36 @@ public class ContaDaoImpl implements ContaDao {
 
 		if (contaDestino != null) {
 			Transferencia transf = new Transferencia(contaOrigem.getNumeroConta(), contaDestino.getNumeroConta(),
-					valor);
+					valor, tipo);
 
 			transf.transferir(contaOrigem, contaDestino, valor);
 
 		} else {
 			throw new RuntimeException("Conta destino não encontrada");
 		}
-
+		
 		listaDeContas.add(contaDestino);
 		listaDeContas.add(contaOrigem);
 	}
 
+	@Override
+	public void depositar(double valor, int numeroConta) {
+		Conta conta3 = null;
+		for (Conta conta : listaDeContas) {
+			if (numeroConta == conta.getNumeroConta()) {
+				conta.setSaldo(valor + conta.getSaldo());
+				conta3 = conta;
+				break;  
+	        }
+	    }
+
+	    if (conta3 != null) {
+	        
+	        listaDeContas.remove(conta3);
+	        listaDeContas.add(conta3);
+	    } else {
+	     
+	        throw new RuntimeException("Conta não encontrada");
+	    }
+	}
 }

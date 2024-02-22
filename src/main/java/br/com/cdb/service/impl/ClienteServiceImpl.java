@@ -28,7 +28,7 @@ public class ClienteServiceImpl implements ClienteService {
 	public Cliente login(String nome, String senha) {
 		Cliente cliente = clienteDao.login(nome, senha);
 		if(cliente != null) {
-			if(senha.equalsIgnoreCase(cliente.getSenha())){
+			if(senha.equals(cliente.getSenha())){
 				return cliente;
 			}
 			else {

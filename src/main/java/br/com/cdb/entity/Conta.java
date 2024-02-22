@@ -1,10 +1,10 @@
 package br.com.cdb.entity;
 
-import br.com.cdb.enums.TipoConta;
+
 
 public class Conta {
 
-	private TipoConta tipoConta;
+	
 	private String senha;
 	private double saldo;
 	private int numeroConta;
@@ -15,14 +15,13 @@ public class Conta {
 	public Conta() {
 	}
 
-	public Conta(TipoConta tipoConta, String senha, double saldo, int numeroConta, 
-			int agencia, long id, String cpfDoCliente) {
-		this.tipoConta = tipoConta;
+	public Conta(String senha, double saldo, int numeroConta, 
+			int agencia, String cpfDoCliente) {
+		
 		this.senha = senha;
 		this.saldo = saldo;
 		this.numeroConta = numeroConta;
 		this.agencia = agencia;
-		this.id = id;
 		this.cpfDoCliente = cpfDoCliente;
 	}
 
@@ -48,20 +47,13 @@ public class Conta {
 
 	}
 
-	public TipoConta getTipoConta() {
-		return tipoConta;
-	}
-
-	public void setTipoConta(TipoConta tipoConta) {
-		this.tipoConta = tipoConta;
-	}
 
 	public String getSenha() {
 		return senha;
 	}
 
 	public void setSenha(String senha) {
-		String regex = "^.{8,}$";
+		String regex = "^.{4,}$";
 		if (senha.matches(regex)) {
 			this.senha = senha;
 		} else {
