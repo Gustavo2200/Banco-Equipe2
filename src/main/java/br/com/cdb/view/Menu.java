@@ -70,9 +70,9 @@ public class Menu {
 					System.out.println("Tente novamente.");
 					menuPrincipal();
 				}
-				
+				if(clienteLogado!=null) {
 				 menuBanco(clienteLogado);
-				 
+				}
 	}
 
 	private void menuBanco(Cliente clienteLogado) {
