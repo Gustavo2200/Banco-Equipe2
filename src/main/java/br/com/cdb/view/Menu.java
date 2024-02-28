@@ -1,6 +1,7 @@
 package br.com.cdb.view;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import br.com.cdb.entity.Cliente;
 import br.com.cdb.entity.Conta;
@@ -160,11 +161,16 @@ public class Menu {
                     break;
 
                 case 5:
-                  System.out.println("Histórico de tranferência");
-                    for (Transferencia transferencia : transferenciaService.historico(conta.getNumeroConta())) {
+                  List<Transferencia> historico= transferenciaService.historico(conta.getNumeroConta());
+                	if(historico.isEmpty()) {
+                		System.out.println("Voce nao realizou nenhuma transferencia");
+                	}
+                	else {
+                	System.out.println("Histórico de tranferência");
+                    for (Transferencia transferencia : historico) {
                  	   System.out.println(transferencia);
                     }
-                   
+                	}
                     break;
 
                 case 6:
@@ -230,7 +236,7 @@ public class Menu {
 				System.out.println(e.getMessage());
 			}
 		}
-
+ 
 		String senha;
 		while (true) {
 			System.out.println("Digite sua senha do app (8 digitos):");
@@ -247,14 +253,14 @@ public class Menu {
 			}
 			
 		}
-
+ 
 		int agencia = contaService.numeroAgencia();
 		int numeroConta = contaService.numerConta();
-
+ 
 		System.out.println("\nVamos Criar sua conta:");
 		System.out.println("Sua agência é: " + agencia);
 		System.out.println("O numero da sua conta é: " + numeroConta);
-
+ 
 		String senhaConta;
 		
 		Conta conta1 = new Conta();
@@ -275,13 +281,13 @@ public class Menu {
 		}
 		try {
 		
-		conta1 = new Conta(senha, 0, numeroConta, 
+		conta1 = new Conta(senha, 0, numeroConta,
 				agencia, cpf);
 			
 		contaService.addConta(conta1);
 		
 		Cliente cliente1 = new Cliente(nome, senha, dataDeNascimento, cpf, email);
-
+ 
 		clienteService.addCliente(cliente1);
 		System.out.println("Cliente registrado com sucesso.");
 		
