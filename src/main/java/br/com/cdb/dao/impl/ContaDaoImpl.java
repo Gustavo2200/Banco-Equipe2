@@ -122,4 +122,24 @@ public class ContaDaoImpl implements ContaDao {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean getAgencia(int agencia) {
+		for(Conta conta:listaDeContas) {
+			if(agencia ==conta.getAgencia()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean getNumero(int numero) {
+		for(Conta conta:listaDeContas) {
+			if(numero==conta.getNumeroConta()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -144,7 +144,8 @@ public class Menu {
 						System.out.println("Senha incorreta");
 					}
 					break;
-                case 4:
+                
+                	case 4:
                 	System.out.println("Digite a senha de transferência");
 					input = new Scanner(System.in);
 					String senha1 = input.nextLine();
@@ -179,6 +180,7 @@ public class Menu {
 						System.out.println("Senha incorreta!");
 					}
 					break;
+                
                 case 5:
                   List<Transferencia> historico= transferenciaService.historico(conta.getNumeroConta());
                 	if(historico.isEmpty()) {
@@ -191,8 +193,7 @@ public class Menu {
                     }
                 	}
                     break;
-
-                case 6:
+               case 6:
                     repet = false;
                     break;
                     
