@@ -37,7 +37,7 @@ public class Menu {
 	}
 
 	private void menuPrincipal() {
-		System.out.println("1-Cadastrar\n" + "2-Realizar login");
+		try {System.out.println("1-Cadastrar\n" + "2-Realizar login");
 
 		int opcao = input.nextInt();
         input.nextLine();
@@ -49,8 +49,11 @@ public class Menu {
 		case 2:
 			login();
 			break;
+			}
+		}catch(Exception e ) {
+			System.out.println("Opcao invalida, insira 1 ou 2");
 		}
-	}
+		}
 
 
 	private void login() {
@@ -104,62 +107,78 @@ public class Menu {
             Conta conta = contaService.getCpf(clienteLogado.getCpf());
            
             switch (option) {
-          
-                case 1:
+            		case 1:
                 
                     System.out.println("Seu saldo atual: ");
                     System.out.println(conta.getSaldo());
                     break;
-
-                case 2:
+                	case 2:
                     System.out.println("Digite o valor a Depositar: ");
                     double valor = input.nextDouble();
                     contaService.depositar(valor, conta.getNumeroConta());
-                    break;
-
-                case 3:
-                	System.out.println("Digite sua senha de transferência:");
-                	input = new Scanner(System.in);
-                	String senha = input.nextLine();   
-                	
-                	if(contaService.getSenha(senha)) {
-                	System.out.println("Digite a chave pix:");
-                    String chavePix = input.nextLine();
-
-                    System.out.println("Digite o valor da transferência:");
-                    double valor1 = input.nextDouble();
                     
-                   
-                    contaService.transferenciaPix(conta.getId(), chavePix, valor1, TipoPagamento.PIX);
-                    Transferencia transferencia2 = new Transferencia(conta.getNumeroConta(), contaService.getCpf(chavePix).getNumeroConta() , valor1, TipoPagamento.PIX);
-                    transferenciaService.salvar(transferencia2);
-                	}
                     break;
-
+                	case 3:
+                	System.out.println("Digite sua senha de transferência:");
+					input = new Scanner(System.in);
+					String senha = input.nextLine();
+					if (senha.equals(conta.getSenha())) {
+						System.out.println("Digite a chave pix:");
+						String chavePix = input.nextLine();
+ 
+						Conta contaDestino=contaService.getCpf(chavePix);
+						if(contaDestino!=null) {
+						System.out.println("Digite o valor da transferência:");
+						double valor1 = input.nextDouble();
+ 
+						contaService.transferenciaPix(conta.getId(), chavePix, valor1, TipoPagamento.PIX);
+						Transferencia transferencia2 = new Transferencia(conta.getNumeroConta(),
+								contaService.getCpf(chavePix).getNumeroConta(), valor1, TipoPagamento.PIX);
+						transferenciaService.salvar(transferencia2);
+						}
+						else {
+							System.out.println("Conta não encontrada!");
+						}
+					}
+					else {
+						System.out.println("Senha incorreta");
+					}
+					break;
                 case 4:
                 	System.out.println("Digite a senha de transferência");
-                	input = new Scanner(System.in);
-                	String senha1 = input.nextLine();
-                	
-                	if(contaService.getSenha(senha1)) {
-                    System.out.println("Digite a agência da conta destino:");
-                    int agencia = input.nextInt();
-                    input.nextLine();
-
-                    System.out.println("Digite o número da conta origem:");
-                    int numeroConta = input.nextInt();
-                    input.nextLine();
-
-                    System.out.println("Digite o valor da transferência:");
-                    int valorTed = input.nextInt();
-                    input.nextLine();
-                    
-                    contaService.transferenciaTed(agencia, numeroConta, valorTed, TipoPagamento.TED, conta.getId());
-                    Transferencia transferencia1 = new Transferencia(conta.getNumeroConta(), numeroConta , valorTed, TipoPagamento.TED);
-                    transferenciaService.salvar(transferencia1);
-                	}
-                    break;
-
+					input = new Scanner(System.in);
+					String senha1 = input.nextLine();
+ 
+					if (senha1.equals(conta.getSenha())) {
+						System.out.println("Digite a agência da conta destino:");
+						int agencia = input.nextInt();
+						input.nextLine();
+						if(contaService.getAgencia(agencia)) {
+						System.out.println("Digite o número da conta origem:");
+						int numeroConta = input.nextInt();
+						input.nextLine();
+						if(contaService.getNumero(numeroConta)) {
+						System.out.println("Digite o valor da transferência:");
+						double valorTed = input.nextInt();
+						input.nextLine();
+ 
+						contaService.transferenciaTed(agencia, numeroConta, valorTed, TipoPagamento.TED, conta.getId());
+						Transferencia transferencia1 = new Transferencia(conta.getNumeroConta(), numeroConta, valorTed,
+								TipoPagamento.TED);
+						transferenciaService.salvar(transferencia1);
+						}
+						else {
+							System.out.println("Número da conta incorreto");
+						}
+					}
+						else {
+							System.out.println("Agência incorreta");
+						}
+					}
+					else {
+						System.out.println("Senha incorreta!");
+					}
+					break;
                 case 5:
                   List<Transferencia> historico= transferenciaService.historico(conta.getNumeroConta());
                 	if(historico.isEmpty()) {

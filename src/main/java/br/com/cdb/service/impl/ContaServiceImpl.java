@@ -37,8 +37,11 @@ public class ContaServiceImpl implements ContaService {
 
 	
 	public void transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo) {
+		if(valorPositivo(valor)) {
 		contaDao.transferenciaPix(idContaOrigem, cpfDestino, valor, tipo);
-
+		}else {
+			throw new RuntimeException("O valor da transferencia deve ser positivo");
+		}
 
 	}
 	
@@ -51,8 +54,11 @@ public class ContaServiceImpl implements ContaService {
 
 	@Override
 	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+		if(valorPositivo(valor)) {
 		contaDao.transferenciaTed(agencia, numeroConta, valor, tipo, id);
-
+		}else {
+			throw new RuntimeException("O valor da transferencia deve ser positivo");
+		}
 	}
 
 	@Override
@@ -77,15 +83,15 @@ public class ContaServiceImpl implements ContaService {
 
 	@Override
 	public void depositar(double valor, int numeroConta) {
+		if(valorPositivo(valor)) {
 		contaDao.depositar(valor, numeroConta);
-		
+		}else {
+			throw new RuntimeException("O valor do deposito deve ser positivo");
+		}
 	}
 
 
-	@Override
-	public boolean getSenha(String senha) {
-		return contaDao.getSenha(senha);
-	}
+	
 	@Override
 	public String validacaoSenha(String senha) {
 		String regex = "^.{4,}$";
@@ -95,4 +101,29 @@ public class ContaServiceImpl implements ContaService {
 			throw new RuntimeException("Erro, senha inválida!");
 		}
 	}
+
+
+	@Override
+	public boolean valorPositivo(double valor) {
+		
+		return valor>0;
+	}
+
+
+	@Override
+	public boolean getAgencia(int agencia) {
+		
+		 return contaDao.getAgencia(agencia);
+	}
+
+
+	@Override
+	public boolean getNumero(int numero) {
+		
+			return contaDao.getNumero(numero);
+		
+	}
+
+
+	
 }

@@ -25,8 +25,12 @@ public interface ContaService {
 	
 	public List<Conta> listar();
 
-	public boolean getSenha(String senha);
+	public boolean getAgencia(int agencia);
+	
+	public boolean getNumero(int numero);
 	
 	String validacaoSenha(String senha);
+	
+	public boolean valorPositivo(double valor);
 
 }
