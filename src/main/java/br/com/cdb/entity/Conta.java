@@ -38,13 +38,7 @@ public class Conta {
 	}
 
 	public void setCpfDoCliente(String cpfDoCliente) {
-		String regex = "^[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}$";
-		if (cpfDoCliente.matches(regex)) {
-			this.cpfDoCliente = cpfDoCliente;
-		} else {
-			throw new RuntimeException("Erro, cpf inválido!");
-		}
-
+		this.cpfDoCliente=cpfDoCliente;
 	}
 
 
@@ -53,12 +47,7 @@ public class Conta {
 	}
 
 	public void setSenha(String senha) {
-		String regex = "^.{4,}$";
-		if (senha.matches(regex)) {
-			this.senha = senha;
-		} else {
-			throw new RuntimeException("Erro, senha inválida!");
-		}
+		this.senha=senha;
 
 	}
 

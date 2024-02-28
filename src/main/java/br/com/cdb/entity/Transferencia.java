@@ -21,6 +21,17 @@ public class Transferencia {
 		this.tipo=tipo;
 	}
 	
+	public void transferir(Conta contaOrigem, Conta contaDestino, double valor) {
+		if (contaOrigem.getSaldo() >= valor) {
+			contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
+			contaDestino.setSaldo(contaDestino.getSaldo() + valor);
+			
+		} else {
+			
+			throw new RuntimeException("Saldo insuficiente");
+		}
+		
+	}
 	 @Override
 	    public String toString(){
 	        return "Conta Origem: " +pessoa1 + "\nConta Destino: " + pessoa2
@@ -36,17 +47,6 @@ public class Transferencia {
 
 	
 
-	public void transferir(Conta contaOrigem, Conta contaDestino, double valor) {
-		if (contaOrigem.getSaldo() >= valor) {
-			contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
-			contaDestino.setSaldo(contaDestino.getSaldo() + valor);
-
-		} else {
-
-			throw new RuntimeException("Saldo insuficiente");
-		}
-
-	}
 
 	public int getPessoa1() {
 		return pessoa1;

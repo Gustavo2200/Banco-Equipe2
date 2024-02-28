@@ -86,5 +86,13 @@ public class ContaServiceImpl implements ContaService {
 	public boolean getSenha(String senha) {
 		return contaDao.getSenha(senha);
 	}
-	
+	@Override
+	public String validacaoSenha(String senha) {
+		String regex = "^.{4,}$";
+		if (senha.matches(regex)) {
+			return senha;
+		} else {
+			throw new RuntimeException("Erro, senha inválida!");
+		}
+	}
 }

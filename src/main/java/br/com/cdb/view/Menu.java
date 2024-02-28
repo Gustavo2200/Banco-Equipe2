@@ -187,6 +187,7 @@ public class Menu {
 			System.out.println("Digite seu nome:");
 			try {
 				nome = input.nextLine();
+				clienteService.validacaoNome(nome);
 				cliente.setNome(nome);
 				break;
 			} catch (Exception e) {
@@ -198,6 +199,7 @@ public class Menu {
 			System.out.println("Digite seu cpf:");
 			try {
 				cpf = input.nextLine();
+				clienteService.validacaoCpf(cpf);
 				cliente.setCpf(cpf);
 				break;
 			} catch (Exception e) {
@@ -209,6 +211,7 @@ public class Menu {
 			System.out.println("Digite sua data de nascimento:");
 			try {
 				dataDeNascimento = input.nextLine();
+				clienteService.validacaoData(dataDeNascimento);
 				cliente.setDataNascimento(dataDeNascimento);
 				break;
 			} catch (Exception e) {
@@ -220,6 +223,7 @@ public class Menu {
 			System.out.println("Digite seu email:");
 			try {
 				email = input.nextLine();
+				clienteService.validacaoEmail(email);
 				cliente.setEmail(email);
 				break;
 			} catch (Exception e) {
@@ -232,6 +236,7 @@ public class Menu {
 			System.out.println("Digite sua senha do app (8 digitos):");
 			try {
 				senha = input.nextLine();
+				clienteService.validacaoSenha(senha);
 				cliente.setSenha(senha);
 				break;
 			} catch (InputMismatchException e) {
@@ -257,7 +262,9 @@ public class Menu {
 			System.out.println("Digite sua senha de Transferência (4 digitos):");
 			try {
 				senhaConta = input.nextLine();
+				contaService.validacaoSenha(senhaConta);
 				conta1.setSenha(senhaConta);
+				System.out.println("Conta Criada");
 				break;
 			} catch (InputMismatchException e) {
 				System.out.println("Apenas numeros.");
@@ -266,8 +273,7 @@ public class Menu {
 				System.out.println(ex.getMessage());
 			}
 		}
-
-		System.out.println("Conta Criada");
+		try {
 		
 		conta1 = new Conta(senha, 0, numeroConta, 
 				agencia, cpf);
@@ -280,5 +286,10 @@ public class Menu {
 		System.out.println("Cliente registrado com sucesso.");
 		
 		menuPrincipal();
+		}
+		catch(RuntimeException e) {
+			System.out.println(e.getMessage());
+			menuPrincipal();
+		}
 	}
 }
