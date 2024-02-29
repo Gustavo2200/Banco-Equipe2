@@ -52,6 +52,7 @@ public class Menu {
 			}
 		}catch(Exception e ) {
 			System.out.println("Opcao invalida, insira 1 ou 2");
+			input.nextLine();
 		}
 		}
 
