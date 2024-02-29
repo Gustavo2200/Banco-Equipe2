@@ -36,7 +36,7 @@ public class ClienteDaoImpl implements ClienteDao {
 	public Cliente login(String nome, String senha) {
 		for (int i = 0; i < listaDeClientes.size(); i++) {
 			Cliente clientes = listaDeClientes.get(i);
-			if (nome.equals(listaDeClientes.get(i).getNome())) {
+			if (nome.equalsIgnoreCase(listaDeClientes.get(i).getNome())) {
 				return clientes;
 			}
 		}

@@ -18,5 +18,7 @@ public interface ClienteService {
 	String validacaoEmail(String email);
 
 	String validacaoSenha(String senha);
+	
+	Cliente CpfExiste(String cpf);
 
 }

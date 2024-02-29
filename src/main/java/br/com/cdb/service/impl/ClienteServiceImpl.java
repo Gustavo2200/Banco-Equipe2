@@ -14,13 +14,7 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	@Override
 	public void addCliente(Cliente cliente) {
-		Cliente c = clienteDao.CpfExiste(cliente.getCpf());
-		if(c==null) {
 		clienteDao.addCliente(cliente);
-		}
-		else {
-			throw new RuntimeException("Cpf já cadastrado");
-		}
 	}
 
 
@@ -93,6 +87,11 @@ public class ClienteServiceImpl implements ClienteService {
 		} else {
 			throw new RuntimeException("Erro, senha inv�lida!");
 		}
+	}
+
+	@Override
+	public Cliente CpfExiste(String cpf) {
+		return clienteDao.CpfExiste(cpf);
 	}
 
 }
