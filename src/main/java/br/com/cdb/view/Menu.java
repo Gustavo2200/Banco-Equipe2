@@ -128,9 +128,18 @@ public class Menu {
  
 						Conta contaDestino=contaService.getCpf(chavePix);
 						if(contaDestino!=null) {
+							double valor1;
+							while(true) {
+								try {
 						System.out.println("Digite o valor da transferência:");
-						double valor1 = input.nextDouble();
- 
+						 valor1 = input.nextDouble();
+						 input.nextLine();
+						 break;
+								}catch(Exception e) {
+									System.out.println("Insira uma entrada valida");
+									input.nextLine();
+								}
+								}
 						contaService.transferenciaPix(conta.getId(), chavePix, valor1, TipoPagamento.PIX);
 						Transferencia transferencia2 = new Transferencia(conta.getNumeroConta(),
 								contaService.getCpf(chavePix).getNumeroConta(), valor1, TipoPagamento.PIX);
@@ -146,23 +155,46 @@ public class Menu {
 					break;
                 
                 	case 4:
+                	
                 	System.out.println("Digite a senha de transferência");
 					input = new Scanner(System.in);
 					String senha1 = input.nextLine();
  
 					if (senha1.equals(conta.getSenha())) {
+						int agencia=0;
+						while(true) {
+						try {
 						System.out.println("Digite a agência da conta destino:");
-						int agencia = input.nextInt();
+						 agencia = input.nextInt();
 						input.nextLine();
+						break;
+						}catch(Exception e) {
+							System.out.println("Insira uma entrada valida");
+							input.nextLine();
+						}}
 						if(contaService.getAgencia(agencia)) {
+						int numeroConta=0;
+						while(true) {
+						try {
 						System.out.println("Digite o número da conta origem:");
-						int numeroConta = input.nextInt();
+						 numeroConta = input.nextInt();
 						input.nextLine();
+						break;}catch(Exception e) {
+							System.out.println("Insira uma entrada valida");
+							input.nextLine();
+						}}
 						if(contaService.getNumero(numeroConta)) {
+							double valorTed=0;
+							while(true) {
+								try {
 						System.out.println("Digite o valor da transferência:");
-						double valorTed = input.nextInt();
+						 valorTed = input.nextInt();
 						input.nextLine();
- 
+						break;}catch(Exception e) {
+							System.out.println("Insira uma entrada valida");
+							input.nextLine();
+						}
+							}
 						contaService.transferenciaTed(agencia, numeroConta, valorTed, TipoPagamento.TED, conta.getId());
 						Transferencia transferencia1 = new Transferencia(conta.getNumeroConta(), numeroConta, valorTed,
 								TipoPagamento.TED);
@@ -180,17 +212,24 @@ public class Menu {
 						System.out.println("Senha incorreta!");
 					}
 					break;
-                
+				
                 case 5:
-                  List<Transferencia> historico= transferenciaService.historico(conta.getNumeroConta());
+                	List<Transferencia> historico= transferenciaService.historico(conta.getNumeroConta());
                 	if(historico.isEmpty()) {
                 		System.out.println("Voce nao realizou nenhuma transferencia");
                 	}
                 	else {
                 	System.out.println("Histórico de tranferência");
                     for (Transferencia transferencia : historico) {
-                 	   System.out.println(transferencia);
+                    	if(transferencia.getPessoa1() == conta.getNumeroConta()) {
+                    		System.out.println("Saida:");
+                    	}
+                    	else {
+                    		System.out.println("Entrada:");
+                    	}
+                    	System.out.println(transferencia);
                     }
+                    
                 	}
                     break;
                case 6:

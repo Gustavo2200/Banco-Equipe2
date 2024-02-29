@@ -32,5 +32,7 @@ public interface ContaService {
 	String validacaoSenha(String senha);
 	
 	public boolean valorPositivo(double valor);
+	
+	
 
 }
