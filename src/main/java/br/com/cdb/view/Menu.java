@@ -114,8 +114,18 @@ public class Menu {
                     System.out.println(conta.getSaldo());
                     break;
                 	case 2:
-                    System.out.println("Digite o valor a Depositar: ");
-                    double valor = input.nextDouble();
+                    double valor=0;
+                    while(true) {
+                    	try {
+                	System.out.println("Digite o valor a Depositar: ");
+                    valor = input.nextDouble();
+                    input.nextLine();
+                    break;
+                    	}catch(Exception e) {
+                    		System.out.println("Tente novamente");
+                    		input.nextLine();
+                    	}
+                    	}
                     contaService.depositar(valor, conta.getNumeroConta());
                     
                     break;
@@ -266,6 +276,7 @@ public class Menu {
 			try {
 				cpf = input.nextLine();
 				clienteService.validacaoCpf(cpf);
+				
 				cliente.setCpf(cpf);
 				break;
 			} catch (Exception e) {
@@ -341,7 +352,7 @@ public class Menu {
 		}
 		try {
 		
-		conta1 = new Conta(senha, 0, numeroConta,
+		conta1 = new Conta(senhaConta, 0, numeroConta,
 				agencia, cpf);
 			
 		contaService.addConta(conta1);

@@ -44,7 +44,14 @@ public class ClienteServiceImpl implements ClienteService {
 		String cpfFormatado = cpf.replace("-", "").replace(".", "");
 		cpf=cpfFormatado.strip();
 		if (cpf.matches(regex)) {
+			Cliente cliente= CpfExiste(cpf);
+			if(cliente!=null) {
+				throw new RuntimeException("Cpf ja cadastrado");
+			}
+			
+			
 			return cpf;
+			
 				
 		} else {
 			throw new RuntimeException("Erro, cpf inv�lido!");
