@@ -13,7 +13,7 @@ public class TransferenciaDaoImpl implements TransferenciaDao{
 	public List<Transferencia> historico(int numero) {
 		List<Transferencia> t = new ArrayList<Transferencia>();
 		for(Transferencia transf: transferencias) {
-			if(transf.getPessoa1() == numero) {
+			if(transf.getPessoa1() == numero|| transf.getPessoa2() == numero) {
 				t.add(transf);
 			}
 		}
