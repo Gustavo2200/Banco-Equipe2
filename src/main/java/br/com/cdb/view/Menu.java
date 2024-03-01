@@ -61,10 +61,10 @@ public class Menu {
 		int escolha = 0;
 		Cliente clienteLogado = null;
 		
-				System.out.println("Insira seu nome:");
+				System.out.println("Insira o nome:");
 				String nome = input.nextLine();
 
-				System.out.println("Insira uma senha");
+				System.out.println("Insira a senha");
 				String senha = input.nextLine();
 				try {
 					clienteLogado = clienteService.login(nome, senha);
@@ -84,14 +84,18 @@ public class Menu {
         boolean repet = true;
 
         while (repet) {
-
-            System.out.println("1. Consultar Saldo.");
+        	 Conta conta = contaService.getCpf(clienteLogado.getCpf());
+           
+        	 System.out.println("Nome: "+clienteLogado.getNome()+"Saldo: " +conta.getSaldo()+"Agencia: "+conta.getAgencia()+"Numero da conta"+conta.getNumeroConta());
+        	 
+        	System.out.println("1. Consultar Saldo.");
             System.out.println("2. Depositar.");
             System.out.println("3. Transferencia via PIX.");
             System.out.println("4. Transferencia via TED.");
             System.out.println("5. Ver Historico de Transferência.");
             System.out.println("6. Voltar.");
-
+            
+            
             int option = 0;
             while (true) {
                 try {
@@ -105,7 +109,7 @@ public class Menu {
                 }
             }
             try {
-            Conta conta = contaService.getCpf(clienteLogado.getCpf());
+            
            
             switch (option) {
             		case 1:
@@ -127,7 +131,7 @@ public class Menu {
                     	}
                     	}
                     contaService.depositar(valor, conta.getNumeroConta());
-                    
+                    System.out.println("Depósito realizado com sucesso");
                     break;
                 	case 3:
                 	System.out.println("Digite sua senha de transferência:");
@@ -155,6 +159,7 @@ public class Menu {
 						Transferencia transferencia2 = new Transferencia(conta.getNumeroConta(),
 								contaService.getCpf(chavePix).getNumeroConta(), valor1, TipoPagamento.PIX);
 						transferenciaService.salvar(transferencia2);
+						System.out.println("Transferencia realizada com sucesso");
 						}
 						else {
 							System.out.println("Conta não encontrada!");
@@ -210,6 +215,7 @@ public class Menu {
 						Transferencia transferencia1 = new Transferencia(conta.getNumeroConta(), numeroConta, valorTed,
 								TipoPagamento.TED);
 						transferenciaService.salvar(transferencia1);
+						System.out.println("Transferencia realizada com sucesso");
 						}
 						else {
 							System.out.println("Número da conta incorreto");
