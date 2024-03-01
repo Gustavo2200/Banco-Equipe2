@@ -86,7 +86,7 @@ public class Menu {
         while (repet) {
         	 Conta conta = contaService.getCpf(clienteLogado.getCpf());
            
-        	 System.out.println("Nome: "+clienteLogado.getNome()+"Saldo: " +conta.getSaldo()+"Agencia: "+conta.getAgencia()+"Numero da conta"+conta.getNumeroConta());
+        	 System.out.println("Nome: "+clienteLogado.getNome()+"\n"+"Saldo: " +conta.getSaldo()+"\n"+"Agencia: "+conta.getAgencia()+"\n"+"Numero da conta: "+conta.getNumeroConta());
         	 
         	System.out.println("1. Consultar Saldo.");
             System.out.println("2. Depositar.");
