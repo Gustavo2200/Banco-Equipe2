@@ -26,7 +26,7 @@ public class ContaDaoImpl implements ContaDao {
 	}
 
 	@Override
-	public Conta contaPorId(long id) {
+	public Conta contaPorId(Long id) {
 
 		for (Conta conta : listaDeContas) {
 			if (conta.getId() == id) {
@@ -113,15 +113,7 @@ public class ContaDaoImpl implements ContaDao {
 	    }
 	}
 
-	@Override
-	public boolean getSenha(String senha) {
-		for(Conta conta:listaDeContas) {
-			if(senha.equals(conta.getSenha())) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 
 	@Override
 	public boolean getAgencia(int agencia) {

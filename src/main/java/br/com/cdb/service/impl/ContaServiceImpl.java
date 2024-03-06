@@ -36,9 +36,9 @@ public class ContaServiceImpl implements ContaService {
 	}
 
 	
-	public void transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo) {
+	public boolean transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo) {
 		if(valorPositivo(valor)) {
-		contaDao.transferenciaPix(idContaOrigem, cpfDestino, valor, tipo);
+		return contaDao.transferenciaPix(idContaOrigem, cpfDestino, valor, tipo);
 		}else {
 			throw new RuntimeException("O valor da transferencia deve ser positivo");
 		}
@@ -53,9 +53,9 @@ public class ContaServiceImpl implements ContaService {
 	
 
 	@Override
-	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 		if(valorPositivo(valor)) {
-		contaDao.transferenciaTed(agencia, numeroConta, valor, tipo, id);
+		return contaDao.transferenciaTed(agencia, numeroConta, valor, tipo, id);
 		}else {
 			throw new RuntimeException("O valor da transferencia deve ser positivo");
 		}
