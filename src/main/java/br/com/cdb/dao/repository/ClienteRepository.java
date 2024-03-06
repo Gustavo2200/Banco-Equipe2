@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import br.com.cdb.entity.Cliente;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente,Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
 }
