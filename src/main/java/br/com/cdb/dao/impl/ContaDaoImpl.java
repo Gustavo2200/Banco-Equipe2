@@ -48,7 +48,7 @@ public class ContaDaoImpl implements ContaDao {
 	}
 
 	@Override
-	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 
 		Conta contaD = new Conta();
 		Conta contaO = new Conta();
@@ -67,11 +67,11 @@ public class ContaDaoImpl implements ContaDao {
 
 		listaDeContas.add(contaO);
 		listaDeContas.add(contaD);
-
+		return true;
 	}
 
 	@Override
-	public void transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo) {
+	public boolean transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo) {
 		Conta contaOrigem = contaPorId(idContaOrigem);
 		Conta contaDestino = null;
 		if (contaOrigem != null) {
@@ -90,6 +90,7 @@ public class ContaDaoImpl implements ContaDao {
 		
 		listaDeContas.add(contaDestino);
 		listaDeContas.add(contaOrigem);
+		return true;
 	}
 
 	@Override

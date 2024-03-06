@@ -1,1 +1,1 @@
-Cpf-Senha-Saldo-Numero-Agencia-Id-Tipo
+Cpf-Senha-Saldo-Numero-Agencia-Id
