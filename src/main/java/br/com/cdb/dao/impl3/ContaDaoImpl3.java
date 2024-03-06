@@ -1,7 +1,6 @@
 package br.com.cdb.dao.impl3;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,8 +62,8 @@ public class ContaDaoImpl3 implements ContaDao{
 			throw new BancoException(HttpStatus.BAD_REQUEST,"Não foi encontrado");
 		}
 		else {
-			c1.setSaldo(valor-c1.getSaldo());
-			c2.setSaldo(valor+c2.getSaldo());
+			c1.setSaldo(c1.getSaldo()-valor);
+			c2.setSaldo(c2.getSaldo()+valor);
 			contaRepository.save(c1);
 			contaRepository.save(c2);
 			return true;
@@ -72,15 +71,20 @@ public class ContaDaoImpl3 implements ContaDao{
 	}
 
 	@Override
-	public void transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
-		Conta c1= contaRepository.findById(idContaOrigem).get();
-		Conta c2= getCpf(cpfDestino);
+	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+		Conta c1 = contaRepository.findById(id).get();
+		Conta c2 = null;
+		for(Conta conta : contaRepository.findAll()) {
+			if(agencia==conta.getAgencia() && numeroConta==conta.getNumeroConta()) {
+				 c2 = conta;
+			}
+		}
 		if(c1==null||c2==null) {
 			throw new BancoException(HttpStatus.BAD_REQUEST,"Não foi encontrado");
 		}
 		else {
-			c1.setSaldo(valor-c1.getSaldo());
-			c2.setSaldo(valor+c2.getSaldo());
+			c1.setSaldo(c1.getSaldo()-valor);
+			c2.setSaldo(c2.getSaldo()+valor);
 			contaRepository.save(c1);
 			contaRepository.save(c2);
 			return true;
