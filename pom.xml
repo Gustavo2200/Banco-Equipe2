@@ -43,17 +43,7 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-    	<groupId>br.com.cdb</groupId>
-    	<artifactId>BancodigitalJPA</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-    	<groupId>br.com.fourbank</groupId>
-    	<artifactId>fourbank</artifactId>
-    	<version>1.0-SNAPSHOT</version>
-    </dependency>
-    </dependencies>
+  </dependencies>
  
 <build>
     <plugins>
