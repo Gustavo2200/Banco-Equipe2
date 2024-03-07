@@ -1,5 +1,11 @@
 package br.com.cdb.entity;
 
+import org.springframework.data.annotation.Id;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+@Entity
 public class Cliente {
 
 	private String nome;
@@ -7,6 +13,8 @@ public class Cliente {
 	private String cpf;
 	private String email;
 	private String senha;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private long id;
 	
 	public Cliente() {}
