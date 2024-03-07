@@ -30,13 +30,42 @@ public class ContaController {
 		return new ResponseEntity(HttpStatus.OK);
 		}
 	
+	@PostMapping("/add")
+	public ResponseEntity<String> addConta(@RequestBody HashMap<String,String> add){
+			Conta conta=new Conta();
+			String senha=add.get("senha");
+			String cpf=add.get("cpf");
+			
+			conta.setSenha(senha);
+			conta.setCpfDoCliente(cpf);
+			
+			contS.addConta(conta);
+			
+			
+			if (senha == null || cpf == null) {
+		        return new ResponseEntity("CPF e senha são obrigatórios",HttpStatus.UNAUTHORIZED);
+		    }
+			
+			return new ResponseEntity("Conta adicionada",HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
 	
 	@PostMapping("/depositar")
-	public ResponseEntity<String> depositar(@RequestBody double valor, @RequestBody int numeroConta){
+	public ResponseEntity<String> depositar(@RequestBody HashMap<String,String> dep){
 		try {
-		if(valor<0) {
+		
+			double valor=(double) Double.parseDouble(dep.get("valor"));
+			int numeroConta=(int) Integer.parseInt(dep.get("numeroConta"));
+			
+			if(valor<0) {
 			throw new RuntimeException("O valor do deposito deve ser positivo");
 		}
+		
 		
 		contS.depositar(valor, numeroConta);
 		
@@ -72,7 +101,7 @@ public class ContaController {
 	}
 	}
 
-
+	@PostMapping("/ted")
 	public ResponseEntity<String> TransferenciaTed(HashMap<String,String> ted){
         try {                                           
 	
