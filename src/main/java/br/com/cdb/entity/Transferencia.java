@@ -1,7 +1,13 @@
 package br.com.cdb.entity;
 
-import br.com.cdb.enums.TipoPagamento;
+import org.springframework.data.annotation.Id;
 
+import br.com.cdb.enums.TipoPagamento;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
 public class Transferencia {
 
 	private int pessoa1;
@@ -9,7 +15,9 @@ public class Transferencia {
 	private int pessoa2;
 
 	private double valor;
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int id;
 	
 	TipoPagamento tipo;
