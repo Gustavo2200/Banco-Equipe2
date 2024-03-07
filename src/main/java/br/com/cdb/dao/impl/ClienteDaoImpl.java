@@ -1,6 +1,8 @@
 package br.com.cdb.dao.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import br.com.cdb.dao.ClienteDao;
 
@@ -53,6 +55,22 @@ public class ClienteDaoImpl implements ClienteDao {
 			}
 		}
 		return null;
+	}
+	
+	public String formatoData(String dataNascimento)  {
+		SimpleDateFormat dt= new SimpleDateFormat("dd/mm/yyyy");
+		SimpleDateFormat dt2=new SimpleDateFormat("yyyy-mm-dd");
+		try {
+		Date dateN=dt.parse(dataNascimento);
+		return dt2.format(dateN);
+		}catch(Exception e) {
+			throw new RuntimeException("Insira um formato valido");
+		}
+	}
+	
+	public String padraoBanco(String dataNascimento) {
+		SimpleDateFormat padrao= new SimpleDateFormat("dd/mm/yyyy");
+		return padrao.format(dataNascimento);
 	}
 
 }
