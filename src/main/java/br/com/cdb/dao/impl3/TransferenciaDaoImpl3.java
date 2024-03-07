@@ -9,7 +9,7 @@ import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.dao.repository.TransferenciaRepository;
 import br.com.cdb.entity.Transferencia;
 
-public class TranferenciaDaoImpl3 implements TransferenciaDao {
+public class TransferenciaDaoImpl3 implements TransferenciaDao {
 
 	@Autowired
 	private TransferenciaRepository transferenciaRepository;
