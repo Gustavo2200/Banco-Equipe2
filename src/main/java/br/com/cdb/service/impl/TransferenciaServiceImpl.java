@@ -2,10 +2,12 @@ package br.com.cdb.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.entity.Transferencia;
 import br.com.cdb.service.TransferenciaService;
-
+@Service
 public class TransferenciaServiceImpl implements TransferenciaService {
 	private TransferenciaDao transDao;
 	

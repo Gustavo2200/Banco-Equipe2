@@ -25,12 +25,12 @@ public class Menu {
 	}
 
 	public void executar() {
-		Cliente c = new Cliente("Yago","12345678","16/02/2005","12345678910","yago.piovarczik1@gmail.com");
+		/*Cliente c = new Cliente("Yago","12345678","16/02/2005","12345678910","yago.piovarczik1@gmail.com");
         Cliente c2 = new Cliente("Eduardo","12345679","12/12/2007", "23456789101", "Eduardo@gmail.com");
         clienteService.addCliente(c);
         clienteService.addCliente(c2);
         contaService.addConta(new Conta("1234", 0, 12345678, 1234, "12345678910" ));
-        contaService.addConta(new Conta("1000", 0, 10000000, 1000, "23456789101" ));
+        contaService.addConta(new Conta("1000", 0, 10000000, 1000, "23456789101" ));*/
 		while (true) {
 			menuPrincipal();
 		}

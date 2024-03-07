@@ -1,11 +1,13 @@
 package br.com.cdb.service.impl;
 
 
+import org.springframework.stereotype.Service;
+
 import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.entity.Cliente;
 import br.com.cdb.service.ClienteService;
 
-
+@Service
 public class ClienteServiceImpl implements ClienteService {
 	private ClienteDao clienteDao;
 	public ClienteServiceImpl(ClienteDao cd) {
