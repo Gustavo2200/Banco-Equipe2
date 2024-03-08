@@ -1,7 +1,10 @@
 package br.com.cdb.service.impl;
 
+import br.com.cdb.service.ClienteService;
 import br.com.cdb.service.ContaService;
 import br.com.cdb.dao.ContaDao;
+import br.com.cdb.dao.impl3.ClienteDaoImpl3;
+import br.com.cdb.entity.Cliente;
 import br.com.cdb.entity.Conta;
 
 
@@ -10,6 +13,8 @@ import br.com.cdb.enums.TipoPagamento;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.stereotype.Service;
+@Service
 public class ContaServiceImpl implements ContaService {
 	ContaDao contaDao;
 	Random random = new Random();
@@ -53,7 +58,7 @@ public class ContaServiceImpl implements ContaService {
 	
 
 	@Override
-	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+	public boolean transferenciaTed(int agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 		if(valorPositivo(valor)) {
 		return contaDao.transferenciaTed(agencia, numeroConta, valor, tipo, id);
 		}else {
@@ -122,6 +127,12 @@ public class ContaServiceImpl implements ContaService {
 		
 			return contaDao.getNumero(numero);
 		
+	}
+
+
+	@Override
+	public Conta contaPorId(Long id) {
+		return contaDao.contaPorId(id);
 	}
 
 

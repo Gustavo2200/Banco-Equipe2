@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.dao.repository.TransferenciaRepository;
 import br.com.cdb.entity.Transferencia;
-
+@Repository
 public class TransferenciaDaoImpl3 implements TransferenciaDao {
 
 	@Autowired

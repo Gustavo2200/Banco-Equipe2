@@ -19,7 +19,7 @@ public interface ContaDao {
 
 	public boolean transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo);
 
-	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id);
+	public boolean transferenciaTed(int agencia, int numeroConta, double valor, TipoPagamento tipo, long id);
 	
 	public boolean getAgencia(int agencia);
 	

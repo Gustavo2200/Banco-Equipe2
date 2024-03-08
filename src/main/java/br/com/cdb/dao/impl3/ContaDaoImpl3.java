@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
 
 import br.com.cdb.dao.ContaDao;
 import br.com.cdb.dao.repository.ContaRepository;
 import br.com.cdb.entity.Conta;
 import br.com.cdb.enums.TipoPagamento;
 import br.com.cdb.exception.BancoException;
-
+@Repository
 public class ContaDaoImpl3 implements ContaDao{
 	@Autowired
 	ContaRepository contaRepository;
@@ -41,7 +42,7 @@ public class ContaDaoImpl3 implements ContaDao{
 	@Override
 	public Conta getCpf(String cpf) {
 		for(Conta conta : contaRepository.findAll()) {
-			if(conta.getCpfDoCliente()==cpf) {
+			if(conta.getCpfDoCliente().equals(cpf)) {
 				return conta;
 			}
 		}
@@ -71,24 +72,19 @@ public class ContaDaoImpl3 implements ContaDao{
 	}
 
 	@Override
-	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+	public boolean transferenciaTed(int agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 		Conta c1 = contaRepository.findById(id).get();
-		Conta c2 = null;
+	
 		for(Conta conta : contaRepository.findAll()) {
 			if(agencia==conta.getAgencia() && numeroConta==conta.getNumeroConta()) {
-				 c2 = conta;
+					 c1.setSaldo(c1.getSaldo()-valor);
+					 conta.setSaldo(conta.getSaldo()+valor);
+					 contaRepository.save(c1);
+					 contaRepository.save(conta);
+					 return true;
 			}
 		}
-		if(c1==null||c2==null) {
-			throw new BancoException(HttpStatus.BAD_REQUEST,"Não foi encontrado");
-		}
-		else {
-			c1.setSaldo(c1.getSaldo()-valor);
-			c2.setSaldo(c2.getSaldo()+valor);
-			contaRepository.save(c1);
-			contaRepository.save(c2);
-			return true;
-		}
+		throw new BancoException(HttpStatus.BAD_REQUEST,"Não foi encontrado");
 	}
 
 	@Override

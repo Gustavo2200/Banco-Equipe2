@@ -108,7 +108,7 @@ public class ContaDaoImpl2 implements ContaDao {
 	}
 
 	@Override
-	public boolean transferenciaTed(long agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
+	public boolean transferenciaTed(int agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

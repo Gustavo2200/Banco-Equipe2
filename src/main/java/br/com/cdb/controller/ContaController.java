@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cdb.entity.Conta;
+import br.com.cdb.entity.Transferencia;
 import br.com.cdb.enums.TipoPagamento;
+import br.com.cdb.service.TransferenciaService;
 import br.com.cdb.service.impl.ContaServiceImpl;
+import br.com.cdb.service.impl.TransferenciaServiceImpl;
 
 @RestController
 @RequestMapping("/conta")
@@ -22,23 +25,26 @@ public class ContaController {
 		
 	@Autowired
 	ContaServiceImpl contS;
+	@Autowired
+	TransferenciaService transfS;
 	
 	@GetMapping("/saldo/{id}")
 	public ResponseEntity<Double> mostrarSaldo(@PathVariable long id){
 		double saldo;	
 		saldo=contS.mostrarSaldo(id);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(saldo,HttpStatus.OK);
 		}
 	
 	@PostMapping("/add")
-	public ResponseEntity<String> addConta(@RequestBody HashMap<String,String> add){
+	public ResponseEntity<?> addConta(@RequestBody HashMap<String,String> add){
 			Conta conta=new Conta();
 			String senha=add.get("senha");
 			String cpf=add.get("cpf");
 			
 			conta.setSenha(senha);
 			conta.setCpfDoCliente(cpf);
-			
+			conta.setAgencia(contS.numeroAgencia());
+			conta.setNumeroConta(contS.numerConta());
 			contS.addConta(conta);
 			
 			
@@ -46,7 +52,7 @@ public class ContaController {
 		        return new ResponseEntity("CPF e senha são obrigatórios",HttpStatus.UNAUTHORIZED);
 		    }
 			
-			return new ResponseEntity("Conta adicionada",HttpStatus.OK);
+			return new ResponseEntity(conta,HttpStatus.OK);
 	}
 	
 	
@@ -86,7 +92,10 @@ public class ContaController {
 	double valor=(double) Double.parseDouble(conta.get("valor"));
 	
 	contS.transferenciaPix(idContaOrigem,cpfDestino,valor,TipoPagamento.PIX);
-	
+	Conta conta1 =contS.contaPorId(idContaOrigem);
+	Conta conta2=contS.getCpf(cpfDestino);
+	Transferencia transf = new Transferencia(conta1.getNumeroConta(),conta2.getNumeroConta(),valor,TipoPagamento.PIX);
+	transfS.salvar(transf);
 	if(valor<0) {
 		throw new RuntimeException("O valor da transferencia deve ser positivo");
 		}
@@ -97,22 +106,24 @@ public class ContaController {
 	
 	
 	}catch(Exception e) {
+		e.getMessage();
 		return new ResponseEntity("Falha ao realizar a transferencia", HttpStatus.UNAUTHORIZED);
 	}
 	}
 
 	@PostMapping("/ted")
-	public ResponseEntity<String> TransferenciaTed(HashMap<String,String> ted){
-        try {                                           
+	public ResponseEntity<String> TransferenciaTed(@RequestBody HashMap<String,String> ted){                                          
 	
 	
-	long agencia=(long) Long.parseLong(ted.get("agencia"));
+	int agencia=(int) Integer.parseInt(ted.get("agencia"));
 	int numeroConta=(int) Integer.parseInt(ted.get("numeroConta"));
 	double valor=(double) Double.parseDouble(ted.get("valor"));
 	
 	long id=(long) Long.parseLong(ted.get("id"));
 	contS.transferenciaTed(agencia, numeroConta, valor, TipoPagamento.TED,id);
-	
+	Conta conta =contS.contaPorId(id);
+	Transferencia transf = new Transferencia(conta.getNumeroConta(),numeroConta,valor,TipoPagamento.TED);
+	transfS.salvar(transf);
 	if(valor<0) {
 		throw new RuntimeException("O valor da transferencia deve ser positivo");
 	}
@@ -121,10 +132,9 @@ public class ContaController {
 	return new ResponseEntity("Transferencia realizado",HttpStatus.OK);
 
 	
-	}catch(Exception e) {
-		return new ResponseEntity("Falha ao realizar a transferencia", HttpStatus.UNAUTHORIZED);
+	
 	}
-	}
+
 
 
 

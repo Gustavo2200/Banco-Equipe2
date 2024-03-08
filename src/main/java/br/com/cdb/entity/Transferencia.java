@@ -1,11 +1,12 @@
 package br.com.cdb.entity;
 
-import org.springframework.data.annotation.Id;
+
 
 import br.com.cdb.enums.TipoPagamento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Transferencia {
@@ -21,6 +22,8 @@ public class Transferencia {
 	private int id;
 	
 	TipoPagamento tipo;
+	
+	public Transferencia() {}
 	
 	public Transferencia(int pessoa1, int pessoa2, double valor, TipoPagamento tipo) {
 		this.pessoa1=pessoa1;

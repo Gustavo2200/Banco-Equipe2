@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.dao.repository.ClienteRepository;
 import br.com.cdb.entity.Cliente;
-
+@Repository
 public class ClienteDaoImpl3 implements ClienteDao {
 
 	@Autowired
