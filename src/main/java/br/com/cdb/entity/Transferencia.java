@@ -21,8 +21,10 @@ public class Transferencia {
 	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int id;
 	
-	TipoPagamento tipo;
+	private TipoPagamento tipo;
 	
+
+
 	public Transferencia() {}
 	
 	public Transferencia(int pessoa1, int pessoa2, double valor, TipoPagamento tipo) {
@@ -81,6 +83,14 @@ public class Transferencia {
 
 	public void setValor(int valor) {
 		this.valor = valor;
+	}
+	
+	public TipoPagamento getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoPagamento tipo) {
+		this.tipo = tipo;
 	}
 
 }
