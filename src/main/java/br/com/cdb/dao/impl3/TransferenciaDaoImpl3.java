@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.dao.repository.TransferenciaRepository;
 import br.com.cdb.entity.Transferencia;
+import br.com.cdb.entity.dto.TransferenciaDto;
 @Repository
 public class TransferenciaDaoImpl3 implements TransferenciaDao {
 
@@ -22,20 +23,37 @@ public class TransferenciaDaoImpl3 implements TransferenciaDao {
 	}
 
 	@Override
-	public List<Transferencia> historico(int numero) {
-		List<Transferencia> historico = new ArrayList<>();
+	public List<TransferenciaDto> historico(int numero) {
+		List<TransferenciaDto> historico = new ArrayList<>();
 		for (Transferencia t : transferenciaRepository.findAll()) {
 			if (t.getPessoa1() == numero || t.getPessoa2() == numero) {
-				historico.add(t);
+				TransferenciaDto transfDto = new TransferenciaDto();
+				transfDto.setContaDestino(t.getPessoa2());
+				transfDto.setContaOrigem(t.getPessoa1());
+				transfDto.setId(t.getId());
+				transfDto.setTipoTransferencia(t.getTipo());
+				transfDto.setValor(t.getValor());
+				historico.add(transfDto);
 			}
 		}
 		return historico;
 	}
 
 	@Override
-	public List<Transferencia> transferencia() {
-
-		return transferenciaRepository.findAll();
+	public List<TransferenciaDto> transferencia() {
+		
+		List<TransferenciaDto> transferenciaDto = new ArrayList<>();
+		
+		for(Transferencia t: transferenciaRepository.findAll()) {
+			TransferenciaDto transfDto = new TransferenciaDto();
+			transfDto.setContaOrigem(t.getPessoa1());
+			transfDto.setContaDestino(t.getPessoa2());
+			transfDto.setId(t.getId());
+			transfDto.setTipoTransferencia(t.getTipo());
+			transfDto.setValor(t.getValor());
+			transferenciaDto.add(transfDto);
+		}
+		return transferenciaDto;
 	}
 
 }
