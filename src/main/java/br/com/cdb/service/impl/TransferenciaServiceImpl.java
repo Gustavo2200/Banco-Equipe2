@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.entity.Transferencia;
+import br.com.cdb.entity.dto.TransferenciaDto;
 import br.com.cdb.service.TransferenciaService;
 @Service
 public class TransferenciaServiceImpl implements TransferenciaService {
@@ -20,12 +21,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	}
 
 	@Override
-	public List<Transferencia> historico(int numero) {
+	public List<TransferenciaDto> historico(int numero) {
 		return transDao.historico(numero);
 	}
 
 	@Override
-	public List<Transferencia> transferencias() {
+	public List<TransferenciaDto> transferencias() {
 		return transDao.transferencia();
 	}
 
