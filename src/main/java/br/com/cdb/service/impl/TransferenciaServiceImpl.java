@@ -21,12 +21,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	}
 
 	@Override
-	public List<TransferenciaDto> historico(int numero) {
+	public List<Transferencia> historico(int numero) {
 		return transDao.historico(numero);
 	}
 
 	@Override
-	public List<TransferenciaDto> transferencias() {
+	public List<Transferencia> transferencias() {
 		return transDao.transferencia();
 	}
 

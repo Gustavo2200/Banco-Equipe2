@@ -2,7 +2,7 @@ package br.com.cdb.entity.dto;
 
 import br.com.cdb.enums.TipoPagamento;
 
-public class TransferenciaDto {
+public class TransferenciaDto{
 
 	private int contaOrigem;
 	private int contaDestino;

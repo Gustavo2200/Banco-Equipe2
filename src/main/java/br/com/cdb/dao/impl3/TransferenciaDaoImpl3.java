@@ -23,37 +23,20 @@ public class TransferenciaDaoImpl3 implements TransferenciaDao {
 	}
 
 	@Override
-	public List<TransferenciaDto> historico(int numero) {
-		List<TransferenciaDto> historico = new ArrayList<>();
+	public List<Transferencia> historico(int numero) {
+		List<Transferencia> historico = new ArrayList<>();
 		for (Transferencia t : transferenciaRepository.findAll()) {
 			if (t.getPessoa1() == numero || t.getPessoa2() == numero) {
-				TransferenciaDto transfDto = new TransferenciaDto();
-				transfDto.setContaDestino(t.getPessoa2());
-				transfDto.setContaOrigem(t.getPessoa1());
-				transfDto.setId(t.getId());
-				transfDto.setTipoTransferencia(t.getTipo());
-				transfDto.setValor(t.getValor());
-				historico.add(transfDto);
+				historico.add(t);
 			}
 		}
 		return historico;
 	}
 
 	@Override
-	public List<TransferenciaDto> transferencia() {
-		
-		List<TransferenciaDto> transferenciaDto = new ArrayList<>();
-		
-		for(Transferencia t: transferenciaRepository.findAll()) {
-			TransferenciaDto transfDto = new TransferenciaDto();
-			transfDto.setContaOrigem(t.getPessoa1());
-			transfDto.setContaDestino(t.getPessoa2());
-			transfDto.setId(t.getId());
-			transfDto.setTipoTransferencia(t.getTipo());
-			transfDto.setValor(t.getValor());
-			transferenciaDto.add(transfDto);
-		}
-		return transferenciaDto;
+	public List<Transferencia> transferencia() {
+	
+		return transferenciaRepository.findAll();
 	}
 
 }
