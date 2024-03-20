@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
 import br.com.cdb.dao.ClienteDao;
 
 import br.com.cdb.entity.Cliente;
 
+@Repository("ClienteDao1")
 public class ClienteDaoImpl implements ClienteDao {
 
 	private List<Cliente> listaDeClientes = new ArrayList<>();

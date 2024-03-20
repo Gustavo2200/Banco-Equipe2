@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
 public class Transferencia {
 
 	private int pessoa1;
@@ -17,8 +16,6 @@ public class Transferencia {
 
 	private double valor;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int id;
 	
 	private TipoPagamento tipo;

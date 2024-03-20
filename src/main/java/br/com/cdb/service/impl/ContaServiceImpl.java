@@ -3,7 +3,6 @@ package br.com.cdb.service.impl;
 import br.com.cdb.service.ClienteService;
 import br.com.cdb.service.ContaService;
 import br.com.cdb.dao.ContaDao;
-import br.com.cdb.dao.impl3.ClienteDaoImpl3;
 import br.com.cdb.entity.Cliente;
 import br.com.cdb.entity.Conta;
 
@@ -13,15 +12,18 @@ import br.com.cdb.enums.TipoPagamento;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 @Service
 public class ContaServiceImpl implements ContaService {
+	@Qualifier("ContaDao1")
+	@Autowired
+	
 	ContaDao contaDao;
 	Random random = new Random();
 
-	public ContaServiceImpl(ContaDao contaDao) {
-		this.contaDao = contaDao;
-	}
+	
 	
 	
 	@Override

@@ -1,6 +1,8 @@
 package br.com.cdb.service.impl;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import br.com.cdb.dao.ClienteDao;
@@ -9,10 +11,10 @@ import br.com.cdb.service.ClienteService;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
+	@Qualifier("ClienteDao1")
+	@Autowired
 	private ClienteDao clienteDao;
-	public ClienteServiceImpl(ClienteDao cd) {
-		this.clienteDao = cd;
-	}
+	
 	
 	@Override
 	public void addCliente(Cliente cliente) {

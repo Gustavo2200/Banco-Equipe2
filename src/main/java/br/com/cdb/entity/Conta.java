@@ -6,15 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-@Entity
+
 public class Conta {
 
 	private String senha;
 	private double saldo;
 	private int numeroConta;
 	private int agencia;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private Long id;
 	private String cpfDoCliente;
 

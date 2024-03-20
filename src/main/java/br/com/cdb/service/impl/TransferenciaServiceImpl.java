@@ -2,6 +2,8 @@ package br.com.cdb.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import br.com.cdb.dao.TransferenciaDao;
@@ -10,11 +12,11 @@ import br.com.cdb.entity.dto.TransferenciaDto;
 import br.com.cdb.service.TransferenciaService;
 @Service
 public class TransferenciaServiceImpl implements TransferenciaService {
+	@Qualifier("TransferenciaDao1")
+	@Autowired
 	private TransferenciaDao transDao;
 	
-	public TransferenciaServiceImpl(TransferenciaDao dao) {
-		this.transDao = dao;
-	}
+	
 	@Override
 	public void salvar(Transferencia t) {
 	 transDao.salvar(t);
