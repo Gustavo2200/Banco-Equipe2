@@ -3,11 +3,14 @@ package br.com.cdb.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.cdb.dao.ContaDao;
 import br.com.cdb.entity.Conta;
 import br.com.cdb.entity.Transferencia;
 import br.com.cdb.enums.TipoPagamento;
 
+@Repository("ContaDao1")
 public class ContaDaoImpl implements ContaDao {
 	private ArrayList<Conta> listaDeContas = new ArrayList<>();
 

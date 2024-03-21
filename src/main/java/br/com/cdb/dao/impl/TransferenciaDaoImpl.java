@@ -3,9 +3,12 @@ package br.com.cdb.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.entity.Transferencia;
 
+@Repository("TransferenciaDao1")
 public class TransferenciaDaoImpl implements TransferenciaDao{
 	private ArrayList<Transferencia> transferencias = new ArrayList<Transferencia>();
 	

@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-@Entity
+
 public class Cliente {
 
 	private String nome;
@@ -14,8 +14,6 @@ public class Cliente {
 	private String cpf;
 	private String email;
 	private String senha;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private long id;
 	
 	public Cliente() {}
