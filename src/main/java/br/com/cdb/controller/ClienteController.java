@@ -23,12 +23,10 @@ public class ClienteController {
 	
 	@PostMapping("/cadastro")
 	public ResponseEntity<String> addCliente(@RequestBody Cliente cliente) {
-		try {
-		
+
 			cServ.validacaoNome(cliente.getNome());
 			cServ.validacaoCpf(cliente.getCpf());
 			cServ.validacaoSenha(cliente.getSenha());
-			cServ.validacaoData(cliente.getDataNascimento());
 			cServ.validacaoEmail(cliente.getEmail());
 			
 			
@@ -36,15 +34,10 @@ public class ClienteController {
 		
 		return new ResponseEntity("Cadastro realizado com sucesso",HttpStatus.OK);
 	
-		}catch(Exception e ) {
-			return new ResponseEntity("Falha ao realizar o cadastro",HttpStatus.UNAUTHORIZED);
-		}
-		
 		}
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody HashMap<String,String> login){
-		try {
 			
 			String nome=login.get("nome");
 			String senha=login.get("senha");
@@ -54,15 +47,8 @@ public class ClienteController {
 			cServ.login(nome, senha);
 		
 		return new ResponseEntity("Login realizado",HttpStatus.OK);
-	
-		}catch(Exception e) {
-			return new ResponseEntity("Falha ao efetuar login",HttpStatus.UNAUTHORIZED);
-		}
-		
 		
 		}
-
-
 
 
 
