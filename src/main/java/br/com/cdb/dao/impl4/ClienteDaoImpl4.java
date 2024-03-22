@@ -3,11 +3,15 @@ package br.com.cdb.dao.impl4;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import org.springframework.stereotype.Repository;
+
 import java.sql.ResultSet;
 import br.com.cdb.dao.ClienteDao;
 import br.com.cdb.dao.Conexao;
 import br.com.cdb.entity.Cliente;
 
+@Repository("ClienteDaoJdbc")
 public class ClienteDaoImpl4 implements ClienteDao {
 	
 
