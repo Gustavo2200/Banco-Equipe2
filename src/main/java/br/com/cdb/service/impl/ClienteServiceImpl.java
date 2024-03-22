@@ -11,7 +11,7 @@ import br.com.cdb.service.ClienteService;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
-	@Qualifier("ClienteDao1")
+	@Qualifier("ClienteDaoJdbc")
 	@Autowired
 	private ClienteDao clienteDao;
 	
