@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 public class Conexao {
 
-public static Connection abrir() throws SQLException {
-	Connection con = DriverManager.getConnection("jdbc:h2:mem:banco", "sa", "");
-	return con;
-}
+	public static Connection abrir() throws SQLException {
+		Connection con = DriverManager.getConnection(
+				"jdbc:mysql://monorail.proxy.rlwy.net:37657/railway?allowMultiQueries=true", "root",
+				"urnWCvjSjEjvAGiIXKxhyPUapmjsCnMT");
+		return con;
+	}
 
 }
