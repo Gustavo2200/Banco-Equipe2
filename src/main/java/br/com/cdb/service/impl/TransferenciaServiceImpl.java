@@ -12,7 +12,7 @@ import br.com.cdb.entity.dto.TransferenciaDto;
 import br.com.cdb.service.TransferenciaService;
 @Service
 public class TransferenciaServiceImpl implements TransferenciaService {
-	@Qualifier("TransferenciaDao1")
+	@Qualifier("TransferenciaDaoJDBC")
 	@Autowired
 	private TransferenciaDao transDao;
 	
