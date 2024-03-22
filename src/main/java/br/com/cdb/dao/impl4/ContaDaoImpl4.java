@@ -8,12 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 
 import br.com.cdb.dao.Conexao;
 import br.com.cdb.dao.ContaDao;
 import br.com.cdb.entity.Conta;
 import br.com.cdb.enums.TipoPagamento;
 
+@Repository("ContaDaoJDBC")
 public class ContaDaoImpl4 implements ContaDao{
 
 	@Override
@@ -28,7 +30,7 @@ public class ContaDaoImpl4 implements ContaDao{
 
 		Statement statement = con.createStatement();
 
-		ResultSet resultado = statement.executeQuery("SELECT * FROM PESSOAS");
+		ResultSet resultado = statement.executeQuery("SELECT * FROM TB_CONTA");
 
 		while (resultado.next()) {
 			Conta c = new Conta();
@@ -55,6 +57,16 @@ public class ContaDaoImpl4 implements ContaDao{
 	public void depositar(double valor, int numeroConta)  {
 		try {
 			Connection con = Conexao.abrir();
+			PreparedStatement statement = con.prepareStatement("SET @nrContaDestino = ?;\r\n"
+					+ "SET @valorTransferencia = ?;\r\n"
+					+ " \r\n"
+					+ " \r\n"
+					+ "SET @novoSaldoDestino = ((SELECT VL_SALDO FROM TB_CONTA WHERE NR_ID_CONTA = @idContaDestino ) + @valorTransferencia);\r\n"
+					+ "\r\n"
+					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_ID_CONTA = @idContaDestino;");
+			statement.setInt(1, numeroConta);
+			statement.setDouble(2, valor);
+			statement.execute();
 			
 			
 		} catch (SQLException e) {
@@ -73,7 +85,7 @@ public class ContaDaoImpl4 implements ContaDao{
 			Connection con = Conexao.abrir();
 			
 
-			PreparedStatement statement = con.prepareStatement("SELECT * FROM PESSOAS WHERE NR_ID_CONTA = ?");
+			PreparedStatement statement = con.prepareStatement("SELECT * FROM TB_CONTA WHERE NR_ID_CONTA = ?");
 
 			ResultSet resultado = statement.executeQuery();
 
@@ -102,14 +114,33 @@ public class ContaDaoImpl4 implements ContaDao{
 
 	@Override
 	public Conta getCpf(String cpf) {
+		Conta c = new Conta();
 		try {
 			Connection con = Conexao.abrir();
-			
+			PreparedStatement statement = con.prepareStatement("SET @cpfCliente = ?;\r\n"
+					+ " \r\n"
+					+ "SELECT * FROM TB_CONTA CO \r\n"
+					+ "inner join TB_CLIENTE CL ON CO.NR_ID_CLIENTE = CL.NR_ID_CLIENTE\r\n"
+					+ "WHERE \r\n"
+					+ "CL.NR_CPF = @cpfCliente");
+
+			ResultSet resultado = statement.executeQuery();
+
+			while (resultado.next()) {
+				
+				c.setId(resultado.getInt("NR_ID_CONTA"));
+				c.setAgencia(resultado.getInt("NR_AGENCIA"));
+				c.setNumeroConta(resultado.getInt("NR_CONTA"));
+				c.setSaldo(resultado.getDouble("VL_SALDO"));
+				c.setSenha(resultado.getString("DS_SENHA"));
+				
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return c;
+		
 	}
 
 	@Override
@@ -145,12 +176,12 @@ public class ContaDaoImpl4 implements ContaDao{
 					+ "SET @valorTransferencia = ?;\r\n"
 					+ " \r\n"
 					+ " \r\n"
-					+ "SET @idContaDestino = (SELECT CO.NR_ID_CONTA FROM TB_CONTA CO INNER JOIN TB_CLIENTE CL ON CO.NR_ID__CLIENTE = CL.NR_ID_CLIENTE WHERE CL.NR_CPF = @cpfClienteDestino);\r\n"
+					+ "SET @idContaDestino = (SELECT CO.NR_ID_CONTA FROM TB_CONTA CO INNER JOIN TB_CLIENTE CL ON CO.NR_ID_CLIENTE = CL.NR_ID_CLIENTE WHERE CL.NR_CPF = @cpfClienteDestino);\r\n"
 					+ " \r\n"
 					+ "INSERT INTO TB_TRANSFERENCIA VALUES(@idContaDestino, @idCOntaOrigem, @valorTransferencia, DEFAULT, @tipoTransferencia);\r\n"
 					+ " \r\n"
 					+ " \r\n"
-					+ "SET @novoSaldoDestino = ((SELECT VL_SALDO TB_CONTA WHERE NR_ID_CONTA = @idContaDestino ) + @valorTransferencia);\r\n"
+					+ "SET @novoSaldoDestino = ((SELECT VL_SALDO FROM TB_CONTA WHERE NR_ID_CONTA = @idContaDestino ) + @valorTransferencia);\r\n"
 					+ " \r\n"
 					+ " \r\n"
 					+ "SET @novoSaldoOrigem = ((SELECT VL_SALDO FROM TB_CONTA WHERE NR_ID_CONTA = @idCOntaOrigem) - @valorTransferencia);\r\n"
@@ -174,7 +205,7 @@ public class ContaDaoImpl4 implements ContaDao{
 		return false;
 	}
 
-	
+	@Override
 	public boolean transferenciaTed(int agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 		try {
 			Connection con = Conexao.abrir();
@@ -218,7 +249,7 @@ public class ContaDaoImpl4 implements ContaDao{
 		return false;
 	}
 
-	
+	@Override
 	public boolean getAgencia(int agencia) {
 		try {
 			Connection con = Conexao.abrir();
@@ -232,7 +263,7 @@ public class ContaDaoImpl4 implements ContaDao{
 		return false;
 	}
 
-	
+	@Override
 	public boolean getNumero(int numero) {
 		try {
 			Connection con = Conexao.abrir();

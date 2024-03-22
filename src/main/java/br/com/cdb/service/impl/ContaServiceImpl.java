@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 @Service
 public class ContaServiceImpl implements ContaService {
-	@Qualifier("ContaDao1")
+	@Qualifier("ContaDaoJDBC")
 	@Autowired
 	
 	ContaDao contaDao;
