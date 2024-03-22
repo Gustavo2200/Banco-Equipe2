@@ -127,6 +127,8 @@ public class ContaDaoImpl4 implements ContaDao{
 					+ "CL.NR_CPF = @cpfCliente";
 			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 
+			statement.setString(1, cpf);
+
 			ResultSet resultado = statement.executeQuery();
 
 			while (resultado.next()) {
@@ -138,6 +140,7 @@ public class ContaDaoImpl4 implements ContaDao{
 				c.setSenha(resultado.getString("DS_SENHA"));
 				
 			}
+			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -197,7 +200,7 @@ public class ContaDaoImpl4 implements ContaDao{
 					+ " \r\n"
 					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoOrigem WHERE NR_ID_CONTA = @idCOntaOrigem";
 			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
-			statement.setString(2, tipo.name());
+			statement.setInt(2, tipo.getTipoPagamento());
 			statement.setLong(3, idContaOrigem);
 			statement.setDouble(4, valor);
 			statement.setString(1, cpfDestino);
