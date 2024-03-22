@@ -150,12 +150,14 @@ public class ContaDaoImpl4 implements ContaDao{
 	public void addConta(Conta conta) {
 		try {
 			Connection con = Conexao.abrir();
-		String sql = "INSERT INTO TB_CONTA(DS_SENHA, VL_SALDO, NR_ID_CLIENTE,\r\n"
-				+ "NR_CONTA, NR_AGENCIA) VALUES (?, ?, ?, ?, ?);";
+		String sql = "SET @cpfCliente = ?;\r\n"
+				+ "\r\n"
+				+ "SET @idUsuario = (SELECT NR_ID_CLIENTE FROM TB_CLIENTE WHERE NR_CPF = @cpfCliente);"
+				+ "INSERT INTO TB_CONTA VALUES (?, ?, ?, ?, DEFAULT, @idUsuario);";
 		PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
-		statement.setString(1, conta.getSenha());
-		statement.setDouble(2, conta.getSaldo());
-		statement.setLong(3, conta.getId());
+		statement.setString(1, conta.getCpfDoCliente());
+		statement.setString(2, conta.getSenha());
+		statement.setDouble(3, conta.getSaldo());
 		statement.setInt(4, conta.getNumeroConta());
 		statement.setInt(5, conta.getAgencia());
 		statement.execute();
