@@ -6,11 +6,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
 import br.com.cdb.dao.Conexao;
 import br.com.cdb.dao.TransferenciaDao;
 import br.com.cdb.entity.Transferencia;
 import br.com.cdb.enums.TipoPagamento;
 
+@Repository("TransferenciaDaoJDBC")
 public class TransferenciaDaoImpl4 implements TransferenciaDao {
 
 	List<Transferencia> transferencias = new ArrayList<Transferencia>();
