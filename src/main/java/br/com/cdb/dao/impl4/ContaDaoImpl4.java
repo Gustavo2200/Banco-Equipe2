@@ -57,13 +57,14 @@ public class ContaDaoImpl4 implements ContaDao{
 	public void depositar(double valor, int numeroConta)  {
 		try {
 			Connection con = Conexao.abrir();
-			PreparedStatement statement = con.prepareStatement("SET @nrContaDestino = ?;\r\n"
+			String sql = "SET @nrContaDestino = ?;\r\n"
 					+ "SET @valorTransferencia = ?;\r\n"
 					+ " \r\n"
 					+ " \r\n"
 					+ "SET @novoSaldoDestino = ((SELECT VL_SALDO FROM TB_CONTA WHERE NR_ID_CONTA = @idContaDestino ) + @valorTransferencia);\r\n"
 					+ "\r\n"
-					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_ID_CONTA = @idContaDestino;");
+					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_ID_CONTA = @idContaDestino;";
+			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 			statement.setInt(1, numeroConta);
 			statement.setDouble(2, valor);
 			statement.execute();
@@ -86,7 +87,8 @@ public class ContaDaoImpl4 implements ContaDao{
 			
 
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM TB_CONTA WHERE NR_ID_CONTA = ?");
-
+			statement.setLong(1, id);
+			
 			ResultSet resultado = statement.executeQuery();
 
 			while (resultado.next()) {
@@ -117,12 +119,13 @@ public class ContaDaoImpl4 implements ContaDao{
 		Conta c = new Conta();
 		try {
 			Connection con = Conexao.abrir();
-			PreparedStatement statement = con.prepareStatement("SET @cpfCliente = ?;\r\n"
+			String sql = "SET @cpfCliente = ?;\r\n"
 					+ " \r\n"
 					+ "SELECT * FROM TB_CONTA CO \r\n"
 					+ "inner join TB_CLIENTE CL ON CO.NR_ID_CLIENTE = CL.NR_ID_CLIENTE\r\n"
 					+ "WHERE \r\n"
-					+ "CL.NR_CPF = @cpfCliente");
+					+ "CL.NR_CPF = @cpfCliente";
+			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 
 			ResultSet resultado = statement.executeQuery();
 
