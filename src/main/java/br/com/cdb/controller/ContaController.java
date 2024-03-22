@@ -63,7 +63,7 @@ public class ContaController {
 	
 	@PostMapping("/depositar")
 	public ResponseEntity<String> depositar(@RequestBody HashMap<String,String> dep){
-		try {
+		
 		
 			double valor=(double) Double.parseDouble(dep.get("valor"));
 			int numeroConta=(int) Integer.parseInt(dep.get("numeroConta"));
@@ -78,14 +78,11 @@ public class ContaController {
 		return new ResponseEntity("Deposito realizado",HttpStatus.OK);
 	
 		
-		}catch(Exception e) {
-			return new ResponseEntity("Falha ao realizar deposito", HttpStatus.UNAUTHORIZED);
-		}
 		}
 
 	@PostMapping("/pix")
 	public ResponseEntity<String> TransferenciaPix(@RequestBody HashMap<String, String> conta){
-        try {                                           
+       
 
 	long idContaOrigem=(long) Long.parseLong(conta.get("idContaOrigem"));
 	String cpfDestino=conta.get("cpfDestino");
@@ -104,11 +101,6 @@ public class ContaController {
 	
 	return new ResponseEntity("Transferencia realizado",HttpStatus.OK);
 	
-	
-	}catch(Exception e) {
-		e.getMessage();
-		return new ResponseEntity("Falha ao realizar a transferencia", HttpStatus.UNAUTHORIZED);
-	}
 	}
 
 	@PostMapping("/ted")
@@ -127,18 +119,10 @@ public class ContaController {
 	if(valor<0) {
 		throw new RuntimeException("O valor da transferencia deve ser positivo");
 	}
-	
-	
+		
 	return new ResponseEntity("Transferencia realizado",HttpStatus.OK);
 
-	
-	
 	}
-
-
-
-
-
 
 }
 
