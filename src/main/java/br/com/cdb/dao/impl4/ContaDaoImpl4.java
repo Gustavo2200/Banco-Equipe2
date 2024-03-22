@@ -61,9 +61,9 @@ public class ContaDaoImpl4 implements ContaDao{
 					+ "SET @valorTransferencia = ?;\r\n"
 					+ " \r\n"
 					+ " \r\n"
-					+ "SET @novoSaldoDestino = ((SELECT VL_SALDO FROM TB_CONTA WHERE NR_ID_CONTA = @idContaDestino ) + @valorTransferencia);\r\n"
+					+ "SET @novoSaldoDestino = ((SELECT VL_SALDO FROM TB_CONTA WHERE NR_CONTA = @nrContaDestino ) + @valorTransferencia);\r\n"
 					+ "\r\n"
-					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_ID_CONTA = @idContaDestino;";
+					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_CONTA = @nrContaDestino;";
 			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 			statement.setInt(1, numeroConta);
 			statement.setDouble(2, valor);
