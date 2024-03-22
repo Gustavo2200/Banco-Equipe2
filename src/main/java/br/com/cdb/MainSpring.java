@@ -10,8 +10,8 @@ import br.com.cdb.dao.Conexao;
 @SpringBootApplication
 public class MainSpring {
 
-public static void main(String[] args) throws SQLException {
-SpringApplication.run(MainSpring.class, args);
+	public static void main(String[] args) throws SQLException {
+		SpringApplication.run(MainSpring.class, args);
 
 	}
 
