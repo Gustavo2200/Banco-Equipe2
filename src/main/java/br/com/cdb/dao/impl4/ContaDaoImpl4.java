@@ -116,9 +116,9 @@ public class ContaDaoImpl4 implements ContaDao{
 	public void addConta(Conta conta) {
 		try {
 			Connection con = Conexao.abrir();
-		
-		PreparedStatement statement = con.prepareStatement("INSERT INTO TB_CONTA(DS_SENHA, VL_SALDO, NR_ID_CLIENTE,\r\n"
-				+ "NR_CONTA, NR_AGENCIA) VALUES (?, ?, ?, ?, ?);");
+		String sql = "INSERT INTO TB_CONTA(DS_SENHA, VL_SALDO, NR_ID_CLIENTE,\r\n"
+				+ "NR_CONTA, NR_AGENCIA) VALUES (?, ?, ?, ?, ?);";
+		PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 		statement.setString(1, conta.getSenha());
 		statement.setDouble(2, conta.getSaldo());
 		statement.setLong(3, conta.getId());
@@ -136,7 +136,7 @@ public class ContaDaoImpl4 implements ContaDao{
 	public boolean transferenciaPix(long idContaOrigem, String cpfDestino, double valor, TipoPagamento tipo) {
 		try {
 			Connection con = Conexao.abrir();
-			PreparedStatement statement = con.prepareStatement("SET @cpfClienteDestino = ?;\r\n"
+			String sql = "SET @cpfClienteDestino = ?;\r\n"
 					+ " \r\n"
 					+ "SET @tipoTransferencia = ?;\r\n"
 					+ " \r\n"
@@ -159,7 +159,8 @@ public class ContaDaoImpl4 implements ContaDao{
 					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_ID_CONTA = @idContaDestino;\r\n"
 					+ " \r\n"
 					+ " \r\n"
-					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoOrigem WHERE NR_ID_CONTA = @idCOntaOrigem");
+					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoOrigem WHERE NR_ID_CONTA = @idCOntaOrigem";
+			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 			statement.setString(2, tipo.name());
 			statement.setLong(3, idContaOrigem);
 			statement.setDouble(4, valor);
@@ -178,7 +179,7 @@ public class ContaDaoImpl4 implements ContaDao{
 	public boolean transferenciaTed(int agencia, int numeroConta, double valor, TipoPagamento tipo, long id) {
 		try {
 			Connection con = Conexao.abrir();
-			PreparedStatement statement = con.prepareStatement("SET @nrContaDestino = ?;\r\n"
+			String sql = "SET @nrContaDestino = ?;\r\n"
 					+ " \r\n"
 					+ "SET @nrAgenciaDestino = ?;\r\n"
 					+ " \r\n"
@@ -202,7 +203,8 @@ public class ContaDaoImpl4 implements ContaDao{
 					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoDestino WHERE NR_ID_CONTA = @idContaDestino;\r\n"
 					+ " \r\n"
 					+ " \r\n"
-					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoOrigem WHERE NR_ID_CONTA = @idCOntaOrigem");
+					+ "UPDATE TB_CONTA SET VL_SALDO = @novoSaldoOrigem WHERE NR_ID_CONTA = @idCOntaOrigem";
+			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 			statement.setInt(1, numeroConta);
 			statement.setInt(2, agencia);
 			statement.setDouble(3, valor);
@@ -222,7 +224,8 @@ public class ContaDaoImpl4 implements ContaDao{
 	public boolean getAgencia(int agencia) {
 		try {
 			Connection con = Conexao.abrir();
-			PreparedStatement statement = con.prepareStatement("SELECT nr_id_conta FROM TB_CONTA WHERE nr_agencia = ?");
+			String sql = "SELECT nr_id_conta FROM TB_CONTA WHERE nr_agencia = ?";
+			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 			statement.setInt(1, agencia);
 			return statement.execute();
 		} catch (SQLException e) {
@@ -236,7 +239,8 @@ public class ContaDaoImpl4 implements ContaDao{
 	public boolean getNumero(int numero) {
 		try {
 			Connection con = Conexao.abrir();
-			PreparedStatement statement = con.prepareStatement("SELECT nr_id_conta FROM TB_CONTA WHERE nr_conta = ?");
+			String sql = "SELECT nr_id_conta FROM TB_CONTA WHERE nr_conta = ?";
+			PreparedStatement statement = con.prepareStatement(sql.toUpperCase());
 			statement.setInt(1, numero);
 			return statement.execute();
 		} catch (SQLException e) {

@@ -26,7 +26,7 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 		Connection conexao = Conexao.abrir();
 		String sql = "insert into tb_transferencia(NR_CONTA_DESTINO, NR_CONTA_ORIGEM, VL_TRANSFERENCIA, NR_ID_TRANSFERENCIA, NR_TIPO)"
 				+ " values (?, ?, ?, ?, ?)";
-		PreparedStatement ps = conexao.prepareStatement(sql);
+		PreparedStatement ps = conexao.prepareStatement(sql.toUpperCase());
 		ps.setLong(1, transferencia.getPessoa1());
 		ps.setLong(2, transferencia.getPessoa2());
 		ps.setDouble(3, transferencia.getValor());
@@ -48,7 +48,7 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 		Connection con = Conexao.abrir();
 		String sql = "Select * from tb_transferencia where NR_ID_Transferencia = ?";
 		
-		PreparedStatement ps = con.prepareStatement(sql);
+		PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
 		ps.setInt(1, numero);
 		ResultSet rs = ps.executeQuery();
 		Transferencia transf = new Transferencia();
@@ -77,7 +77,7 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 		Connection con = Conexao.abrir();
 		String sql = "select * from tb_transferencia";
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(sql);
+		ResultSet rs = st.executeQuery(sql.toUpperCase());
 		while(rs.next()) {
 			Transferencia t = new Transferencia();
 			t.setPessoa1(rs.getInt("NR_CONTA_DESTINO"));

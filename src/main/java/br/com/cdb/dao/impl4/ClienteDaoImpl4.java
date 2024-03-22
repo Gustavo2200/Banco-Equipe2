@@ -20,7 +20,7 @@ public class ClienteDaoImpl4 implements ClienteDao {
 		try {
 			Connection con = Conexao.abrir();
 			String sql = "insert into tb_cliente (nm_cliente, dt_nascimento, nr_cpf, ds_email, ds_senha) values (?, ?, ?, ?, ?)";
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
 			ps.setString(1, cliente.getNome());
 			ps.setString(2, cliente.getDataNascimento());
 			ps.setString(3, cliente.getCpf());
@@ -40,7 +40,7 @@ public class ClienteDaoImpl4 implements ClienteDao {
 		try {
 			Connection con = Conexao.abrir();
 			String sql = "select * from tb_cliente where nr_id_cliente = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -67,7 +67,7 @@ public class ClienteDaoImpl4 implements ClienteDao {
 		try {
 			Connection con = Conexao.abrir();
 			String sql = "select * from tb_cliente where nm_cliente = ? and ds_senha = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
 			ps.setString(1, nome);
 			ps.setString(2, senha);
 			ResultSet rs = ps.executeQuery();
@@ -95,7 +95,7 @@ public class ClienteDaoImpl4 implements ClienteDao {
 		try {
 			Connection con = Conexao.abrir();
 			String sql = "select * from tb_cliente where nr_cpf = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
 			ps.setString(1, cpf);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
