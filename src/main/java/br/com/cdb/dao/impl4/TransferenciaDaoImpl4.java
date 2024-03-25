@@ -17,8 +17,8 @@ import br.com.cdb.enums.TipoPagamento;
 @Repository("TransferenciaDaoJDBC")
 public class TransferenciaDaoImpl4 implements TransferenciaDao {
 
-	List<Transferencia> transferencias = new ArrayList<Transferencia>();
-	List<Transferencia> t = new ArrayList<Transferencia>();
+	List<Transferencia> transf1 = new ArrayList<Transferencia>();
+
 	
 	@Override
 	public void salvar(Transferencia transferencia) {
@@ -31,8 +31,8 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 		ps.setLong(2, transferencia.getPessoa2());
 		ps.setDouble(3, transferencia.getValor());
 		ps.setObject(4, transferencia.getTipo());
-		transferencia.setId(transferencias.size());
-		transferencias.add(transferencia);
+		transferencia.setId(transf1.size());
+		transf1.add(transferencia);
 		ps.execute();
 		ps.close();
 		conexao.close();
@@ -44,13 +44,16 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 
 	@Override
 	public List<Transferencia> historico(int numero) {
-		try {
+		List<Transferencia> transf2 = new ArrayList<Transferencia>();
+		try {	
 		Connection con = Conexao.abrir();
-		String sql = "Select * from tb_transferencia where NR_ID_Transferencia = ?";
+		String sql = "SELECT * FROM TB_TRANSFERENCIA WHERE NR_CONTA_ORIGEM = ? OR NR_CONTA_DESTINO = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
 		ps.setInt(1, numero);
+		ps.setInt(2, numero);
 		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
 		Transferencia transf = new Transferencia();
 		transf.setId(rs.getInt("NR_ID_TRANSFERENCIA"));
 		transf.setPessoa1(rs.getInt("NR_CONTA_DESTINO"));
@@ -58,14 +61,15 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 		transf.setValor(rs.getInt("VL_TRANSFERENCIA"));
 		transf.setTipo(TipoPagamento.values()[rs.getInt("NR_TIPO")]);
 				
-		t.add(transf);
-		ps.close();
+		transf2.add(transf);
+		}
+		rs.close();
 		con.close();
-        
+		
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		return t;
+		return transf2;
 		}
 	
 	
@@ -85,7 +89,7 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 			t.setValor(rs.getInt("VL_TRANSFERENCIA"));
 			t.setTipo(TipoPagamento.values()[rs.getInt("NR_TIPO")]);
 			t.setId(rs.getInt("NR_ID_TRANSFERENCIA"));
-			transferencias.add(t);
+			transf1.add(t);
 		}
 		con.close();
 
@@ -94,7 +98,7 @@ public class TransferenciaDaoImpl4 implements TransferenciaDao {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return transferencias;
+		return transf1;
 	}
 
 	
