@@ -247,7 +247,7 @@ public class ContaDaoImpl4 implements ContaDao{
 			statement.setInt(1, numeroConta);
 			statement.setInt(2, agencia);
 			statement.setDouble(3, valor);
-			statement.setString(4, tipo.name());
+			statement.setInt(4, tipo.getTipoPagamento());
 			statement.setLong(5, id);
 			return statement.execute();
 			
