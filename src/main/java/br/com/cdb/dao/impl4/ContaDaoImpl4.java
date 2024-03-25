@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.cdb.dao.Conexao;
+import br.com.cdb.config.Conexao;
 import br.com.cdb.dao.ContaDao;
 import br.com.cdb.entity.Conta;
 import br.com.cdb.enums.TipoPagamento;

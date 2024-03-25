@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+
+import br.com.cdb.config.Conexao;
 import br.com.cdb.dao.ClienteDao;
-import br.com.cdb.dao.Conexao;
 import br.com.cdb.entity.Cliente;
 
 @Repository("ClienteDaoJdbc")

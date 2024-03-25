@@ -1,4 +1,4 @@
-package br.com.cdb.dao;
+package br.com.cdb.config;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ public class GeradorBanco {
 				+ "NR_CONTA INT,\r\n"
 				+ "NR_AGENCIA SMALLINT,\r\n"
 				+ "NR_ID_CONTA INT NOT NULL AUTO_INCREMENT,\r\n"
-				+ "NR_ID_CLIENTE INT,\r\n"
+				+ "NR_ID_CLIENTE INT NOT NULL UNIQUE,\r\n"
 				+ "PRIMARY KEY(NR_ID_CONTA),\r\n"
 				+ "FOREIGN KEY(NR_ID_CLIENTE)REFERENCES TB_CLIENTE(NR_ID_CLIENTE)\r\n"
 				+ ");\r\n"

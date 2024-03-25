@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.cdb.dao.ClienteDao;
-import br.com.cdb.dao.GeradorBanco;
 import br.com.cdb.dao.impl.ClienteDaoImpl;
 import jakarta.annotation.PostConstruct;
 
@@ -18,7 +17,5 @@ public class InitBanco {
 		
 		GeradorBanco.gerarTabela();
 	}
-	
-	
 	
 }
