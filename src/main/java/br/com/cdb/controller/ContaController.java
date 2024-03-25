@@ -38,7 +38,7 @@ public class ContaController {
 	@PostMapping("/add")
 	public ResponseEntity<?> addConta(@RequestBody HashMap<String,String> add){
 			Conta conta=new Conta();
-			conta.setId(0);
+			
 			String senha=add.get("senha");
 			String cpf=add.get("cpf");
 			

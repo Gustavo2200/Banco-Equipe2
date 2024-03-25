@@ -1,19 +1,13 @@
 package br.com.cdb.entity;
 
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 public class Conta {
 
 	private String senha;
 	private double saldo;
 	private int numeroConta;
 	private int agencia;
-	private Long id;
+	private long id;
 	private String cpfDoCliente;
 
 	public Conta() {
