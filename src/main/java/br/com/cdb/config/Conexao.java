@@ -8,8 +8,8 @@ public class Conexao {
 
 	public static Connection abrir() throws SQLException {
 		Connection con = DriverManager.getConnection(
-				"jdbc:mysql://viaduct.proxy.rlwy.net:55791/railway?allowMultiQueries=true", "root",
-				"juTzPzlDCFAJdfQeDGwkCeBdGHlGoLKw");
+				"jdbc:mysql://monorail.proxy.rlwy.net:43126/railway?allowMultiQueries=true", "root",
+				"aLZYAEBewGsdluhBEdZkohdLRohHNmTo");
 		return con;
 	}
 
