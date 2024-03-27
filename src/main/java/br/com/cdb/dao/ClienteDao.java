@@ -1,8 +1,5 @@
 package br.com.cdb.dao;
 
-
-import java.util.Date;
-
 import br.com.cdb.entity.Cliente;
 
 public interface ClienteDao {
@@ -12,5 +9,6 @@ public interface ClienteDao {
 	public Cliente getIdCliente(long id);
 	public Cliente login(String nome, String senha);
 	public Cliente CpfExiste(String cpf);
+	public Cliente EmailExiste(String email);
 	
 }

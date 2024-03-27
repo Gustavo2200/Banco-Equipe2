@@ -20,21 +20,22 @@ public class ClienteController {
 	
 	@Autowired
 	ClienteServiceImpl cServ;
-	
 	@PostMapping("/cadastro")
 	public ResponseEntity<String> addCliente(@RequestBody Cliente cliente) {
+	    try {
+	        cServ.validacaoNome(cliente.getNome());
+	        cServ.validacaoCpf(cliente.getCpf());
+	        cServ.validacaoSenha(cliente.getSenha());
+	        cServ.validacaoEmail(cliente.getEmail());
 
-			cServ.validacaoNome(cliente.getNome());
-			cServ.validacaoCpf(cliente.getCpf());
-			cServ.validacaoSenha(cliente.getSenha());
-			cServ.validacaoEmail(cliente.getEmail());
-			
-			
-			cServ.addCliente(cliente);
-		
-		return new ResponseEntity("Cadastro realizado com sucesso",HttpStatus.OK);
-	
-		}
+	        cServ.addCliente(cliente);
+	        
+	        return new ResponseEntity<>("Cadastro realizado com sucesso", HttpStatus.OK);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("Não foi possível realizar o cadastro, email já registrado", HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
+
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody HashMap<String,String> login){
