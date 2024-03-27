@@ -37,30 +37,34 @@ public class ContaController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> addConta(@RequestBody HashMap<String,String> add){
-			Conta conta=new Conta();
+		
+		try {
 			
-			String senha=add.get("senha");
-			String cpf=add.get("cpf");
-			
-			conta.setSenha(senha);
-			conta.setCpfDoCliente(cpf);
-			conta.setAgencia(contS.numeroAgencia());
-			conta.setNumeroConta(contS.numerConta());
-			contS.addConta(conta);
-			
-			
-			if (senha == null || cpf == null) {
-		        return new ResponseEntity("CPF e senha são obrigatórios",HttpStatus.UNAUTHORIZED);
-		    }
-			
-			return new ResponseEntity(conta,HttpStatus.OK);
+		String senha = add.get("senha");
+	    String cpf = add.get("cpf");
+
+	    if (senha == null || cpf == null) {
+	        return new ResponseEntity<>("CPF e senha são obrigatórios", HttpStatus.UNAUTHORIZED);
+	    }
+
+	    if (contS.existeContaComCpfOuSenha(cpf, senha)) {
+	        return new ResponseEntity<>("CPF ou senha já cadastrado", HttpStatus.BAD_REQUEST);
+	    }
+
+	    Conta conta = new Conta();
+        conta.setCpfDoCliente(cpf);
+	    conta.setSenha(senha);
+	    conta.setAgencia(contS.numeroAgencia());
+	    conta.setNumeroConta(contS.numerConta());
+
+	    
+	        contS.addConta(conta);
+	        
+	        return new ResponseEntity<>(conta, HttpStatus.OK);
+	    } catch (RuntimeException e) {
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 	}
-	
-	
-	
-	
-	
-	
 	
 	@PostMapping("/depositar")
 	public ResponseEntity<String> depositar(@RequestBody HashMap<String,String> dep){

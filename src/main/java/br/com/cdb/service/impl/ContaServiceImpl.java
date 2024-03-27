@@ -70,9 +70,26 @@ public class ContaServiceImpl implements ContaService {
 
 	@Override
 	public void addConta(Conta conta) {
-	contaDao.addConta(conta);
-	}
+        String cpf = conta.getCpfDoCliente();
+        String senha = conta.getSenha();
 
+        if (existeContaComCpfOuSenha(cpf, senha)) {
+            throw new RuntimeException("CPF ou senha já cadastrado");
+        }else {
+        contaDao.addConta(conta);
+    }
+        }
+
+	
+	public boolean existeContaComCpfOuSenha(String cpf, String senha) {
+
+	    for (Conta conta : contaDao.listar()) {
+	        if (conta.getCpfDoCliente().equals(cpf) || conta.getSenha().equals(senha)) {
+	            return true; 
+	        }
+	    }
+	    return false; 
+	}
 
 	@Override
 	public Conta getCpf(String cpf) {
