@@ -33,7 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
 				throw new RuntimeException("Senha inválida");
 			}
 		} else {
-			throw new RuntimeException("Usuário inválida");
+			throw new RuntimeException("Usuário inválido");
 		}
 	}
 
@@ -56,7 +56,7 @@ public class ClienteServiceImpl implements ClienteService {
 			return cpf;
 
 		} else {
-			throw new RuntimeException("Erro, cpf inv�lido!");
+			throw new RuntimeException("Cpf inv�lido!");
 		}
 	}
 
@@ -95,7 +95,7 @@ public class ClienteServiceImpl implements ClienteService {
 		if (senha.matches(regex)) {
 			return senha;
 		} else {
-			throw new RuntimeException("Erro, senha inv�lida!");
+			throw new RuntimeException("Senha inv�lida!");
 		}
 	}
 
@@ -110,20 +110,21 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public String validacaoDataNascimento(String dataNascimento) {
-		try {
-			SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
-			formatoData.setLenient(false);
+	    try {
+	        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+	        formatoData.setLenient(false);
 
-			Date d = formatoData.parse(dataNascimento);
-			int anoNascimento = Integer.parseInt(dataNascimento.substring(0, 4));
-			if (anoNascimento >= 1940) {
-				return dataNascimento;
-			} else {
-				throw new IllegalArgumentException("Ano de nascimento deve ser maior ou igual a 1940.");
-			}
-		} catch (ParseException e) {
-			throw new IllegalArgumentException("Formato de data inválido. Utilize o padrão yyyy-MM-dd");
-		}
+	        Date d = formatoData.parse(dataNascimento);
+	        int anoNascimento = Integer.parseInt(dataNascimento.substring(0, 4));
+	        if (anoNascimento >= 1940) {
+	            return dataNascimento;
+	        } else {
+	            throw new IllegalArgumentException("O ano de nascimento deve ser maior ou igual a 1940.");
+	        }
+	    } catch (ParseException e) {
+	        throw new IllegalArgumentException("Formato de data inválido. Utilize o padrão yyyy-MM-dd.");
+	    }
 	}
+
 
 }
