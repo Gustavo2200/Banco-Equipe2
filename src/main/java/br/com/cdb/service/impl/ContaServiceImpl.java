@@ -22,9 +22,6 @@ public class ContaServiceImpl implements ContaService {
 	
 	ContaDao contaDao;
 	Random random = new Random();
-
-	
-	
 	
 	@Override
 	public int numeroAgencia() {
@@ -70,25 +67,19 @@ public class ContaServiceImpl implements ContaService {
 
 	@Override
 	public void addConta(Conta conta) {
-        String cpf = conta.getCpfDoCliente();
-        String senha = conta.getSenha();
+	    String cpf = conta.getCpfDoCliente();
+	    String senha = conta.getSenha();
 
-        if (existeContaComCpfOuSenha(cpf, senha)) {
-            throw new RuntimeException("CPF ou senha já cadastrado");
-        }else {
-        contaDao.addConta(conta);
-    }
-        }
-
-	
-	public boolean existeContaComCpfOuSenha(String cpf, String senha) {
-
-	    for (Conta conta : contaDao.listar()) {
-	        if (conta.getCpfDoCliente().equals(cpf) || conta.getSenha().equals(senha)) {
-	            return true; 
-	        }
+	    if (existeContaComCpf(cpf)) {
+	        throw new RuntimeException("CPF já cadastrado");
 	    }
-	    return false; 
+
+	    if (existeContaComSenha(senha)) {
+	        throw new RuntimeException("Senha já cadastrada");
+	    }
+	    
+
+	    contaDao.addConta(conta);
 	}
 
 	@Override
@@ -154,6 +145,23 @@ public class ContaServiceImpl implements ContaService {
 		return contaDao.contaPorId(id);
 	}
 
+	public boolean existeContaComSenha(String senha) {
+	    for (Conta conta : contaDao.listar()) {
+	        if (conta.getSenha() != null && conta.getSenha().equals(senha)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+	public boolean existeContaComCpf(String cpf) {
+	    for (Conta conta : contaDao.listar()) {
+	        if (conta.getCpfDoCliente() != null && conta.getCpfDoCliente().equals(cpf)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
 	
 }

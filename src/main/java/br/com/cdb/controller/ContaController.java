@@ -36,33 +36,37 @@ public class ContaController {
 		}
 	
 	@PostMapping("/add")
-	public ResponseEntity<?> addConta(@RequestBody HashMap<String,String> add){
-		
-		try {
-			
-		String senha = add.get("senha");
-	    String cpf = add.get("cpf");
+	public ResponseEntity<?> addConta(@RequestBody HashMap<String,String> add) {
+	    try {
+	        String senha = add.get("senha");
+	        String cpf = add.get("cpf");
 
-	    if (senha == null || cpf == null) {
-	        return new ResponseEntity<>("CPF e senha são obrigatórios", HttpStatus.UNAUTHORIZED);
-	    }
+	        if (senha == null || cpf == null) {
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("CPF e senha são obrigatórios");
+	        }
 
-	    if (contS.existeContaComCpfOuSenha(cpf, senha)) {
-	        return new ResponseEntity<>("CPF ou senha já cadastrado", HttpStatus.BAD_REQUEST);
-	    }
+	 
+	        if (contS.existeContaComCpf(cpf)) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF já registrado");
+	        }
 
-	    Conta conta = new Conta();
-        conta.setCpfDoCliente(cpf);
-	    conta.setSenha(senha);
-	    conta.setAgencia(contS.numeroAgencia());
-	    conta.setNumeroConta(contS.numerConta());
 
-	    
-	        contS.addConta(conta);
+	        if (contS.existeContaComSenha(senha)) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Senha já registrada");
+	        }
+
 	        
-	        return new ResponseEntity<>(conta, HttpStatus.OK);
+	        Conta conta = new Conta();
+	        conta.setCpfDoCliente(cpf);
+	        conta.setSenha(senha);
+	        conta.setAgencia(contS.numeroAgencia());
+	        conta.setNumeroConta(contS.numerConta());
+
+	        contS.addConta(conta);
+
+	        return ResponseEntity.status(HttpStatus.OK).body(conta);
 	    } catch (RuntimeException e) {
-	        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 	    }
 	}
 	

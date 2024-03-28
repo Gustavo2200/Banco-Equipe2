@@ -24,5 +24,5 @@ public interface ContaDao {
 	public boolean getAgencia(int agencia);
 	
 	public boolean getNumero(int numero);
-
+   
 }
