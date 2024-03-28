@@ -104,5 +104,9 @@ public class ClienteServiceImpl implements ClienteService {
 	public Cliente CpfExiste(String cpf) {
 		return clienteDao.CpfExiste(cpf);
 	}
+	@Override
+	public Cliente EmailExiste(String email) {
+		return clienteDao.EmailExiste(email);
+	}
 
 }
