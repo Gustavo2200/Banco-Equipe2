@@ -77,5 +77,20 @@ public class ClienteDaoImpl implements ClienteDao {
 		SimpleDateFormat padrao= new SimpleDateFormat("dd/mm/yyyy");
 		return padrao.format(dataNascimento);
 	}
+<<<<<<< HEAD
 	
 	}
+=======
+	@Override
+	public Cliente EmailExiste(String email) {
+		for (int i = 0;i<listaDeClientes.size();i++) {
+			Cliente cliente = listaDeClientes.get(i);
+			if(email.equalsIgnoreCase(listaDeClientes.get(i).getEmail())) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+
+}
+>>>>>>> bf16646590c5f0129bb609fe31014903011ef7e0

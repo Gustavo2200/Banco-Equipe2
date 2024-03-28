@@ -21,6 +21,10 @@ public interface ClienteService {
 	
 	Cliente CpfExiste(String cpf);
 	
+<<<<<<< HEAD
 	String validacaoDataNascimento(String dataNascimento);
+=======
+	Cliente EmailExiste(String email);
+>>>>>>> bf16646590c5f0129bb609fe31014903011ef7e0
 
 }

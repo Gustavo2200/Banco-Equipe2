@@ -116,4 +116,30 @@ public class ClienteDaoImpl4 implements ClienteDao {
 		}
 		return cliente;
 	}
+	@Override
+	public Cliente EmailExiste(String email) {
+		Cliente cliente = null;
+		try {
+			Connection con = Conexao.abrir();
+			String sql = "select * from tb_cliente where ds_email = ?";
+			PreparedStatement ps = con.prepareStatement(sql.toUpperCase());
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				cliente = new Cliente();
+				cliente.setId(rs.getLong("nr_id_cliente"));
+				cliente.setNome(rs.getString("nm_cliente"));
+				cliente.setDataNascimento(rs.getString("dt_nascimento"));
+				cliente.setCpf(rs.getString("nr_cpf"));
+				cliente.setEmail(rs.getString("ds_email"));
+				cliente.setSenha(rs.getString("ds_senha"));
+			}
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cliente;
+	}
 }
