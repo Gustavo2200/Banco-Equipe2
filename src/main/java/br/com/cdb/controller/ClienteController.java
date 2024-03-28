@@ -25,6 +25,7 @@ public class ClienteController {
 	public ResponseEntity<String> addCliente(@RequestBody Cliente cliente) {
 
 			cServ.validacaoNome(cliente.getNome());
+			cServ.validacaoDataNascimento(cliente.getDataNascimento());
 			cServ.validacaoCpf(cliente.getCpf());
 			cServ.validacaoSenha(cliente.getSenha());
 			cServ.validacaoEmail(cliente.getEmail());

@@ -20,5 +20,7 @@ public interface ClienteService {
 	String validacaoSenha(String senha);
 	
 	Cliente CpfExiste(String cpf);
+	
+	String validacaoDataNascimento(String dataNascimento);
 
 }
